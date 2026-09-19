@@ -1,0 +1,12 @@
+id;nome;categoria
+A001;Ana Souza;Geral
+A002;Bruno Lima;Geral
+A003;Carla Mendes;Geral
+A004;Diego Alves;Geral
+A005;Eduarda Rocha;Geral
+A006;Felipe Santos;Geral
+A007;Gabriela Martins;Geral
+A008;Henrique Costa;Geral
+A009;Isabela Gomes;Geral
+A010;João Pereira;Geral
+

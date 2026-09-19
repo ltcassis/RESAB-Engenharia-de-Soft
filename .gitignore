@@ -1,0 +1,21 @@
+# Arquivos temporários do Python
+__pycache__/
+*.py[cod]
+
+# Ambientes virtuais e configurações locais
+.venv/
+venv/
+env/
+.env
+.vscode/
+
+# Saídas geradas durante a execução
+/resultados.csv
+dados/provas/*/resultados.csv
+dados/provas/*/inconsistencias.txt
+dados/provas/*/historico.txt
+dados/provas/*/historico/
+
+# Arquivos temporários do sistema
+.DS_Store
+Thumbs.db

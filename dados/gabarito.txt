@@ -1,0 +1,12 @@
+numero;respostas_aceitas;peso;dificuldade;anulada
+1;A;1.0;FACIL;NAO
+2;B;1.0;FACIL;NAO
+3;C;1.5;MEDIA;NAO
+4;D;1.5;MEDIA;NAO
+5;A|B;2.0;DIFICIL;NAO
+6;C;1.0;FACIL;NAO
+7;D;1.5;MEDIA;NAO
+8;E;2.0;DIFICIL;NAO
+9;B;1.0;MEDIA;NAO
+10;A;1.0;MEDIA;SIM
+

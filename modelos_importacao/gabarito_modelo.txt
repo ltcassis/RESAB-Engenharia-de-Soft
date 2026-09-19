@@ -1,0 +1,4 @@
+numero;respostas_aceitas;peso;dificuldade;anulada
+1;A;1.0;FACIL;NAO
+2;B|C;2.0;DIFICIL;NAO
+

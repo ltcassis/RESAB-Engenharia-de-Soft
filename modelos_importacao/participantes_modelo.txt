@@ -1,0 +1,3 @@
+id;nome;categoria
+A001;Nome do participante;Nivel 1
+
