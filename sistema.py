@@ -9,15 +9,26 @@ from modelos import Participante, Prova, Questao, Resultado
 
 
 class CorretorProvas:
-    ALTERNATIVAS_VALIDAS = {"A", "B", "C", "D", "E"}
+    """Regras, persistência e correção das provas."""
+
+    ALTERNATIVAS_VALIDAS = set("ABCDE")
+    DIFICULDADES = {"FACIL", "MEDIA", "DIFICIL"}
     PADRAO_IDENTIFICADOR = re.compile(r"[A-Z0-9_-]+")
+    CABECALHOS = {
+        "provas": ["id", "nome", "disciplina", "categoria"],
+        "participantes": ["id", "nome", "categoria"],
+        "gabarito": ["numero", "respostas_aceitas", "peso", "dificuldade", "anulada"],
+        "respostas": ["participante_id", "respostas"],
+    }
 
     def __init__(self, pasta_dados: Path) -> None:
-        self.pasta_dados = pasta_dados
-        self.pasta_provas = pasta_dados / "provas"
-        self.arquivo_provas = pasta_dados / "provas.txt"
+        self.pasta_dados = Path(pasta_dados)
+        self.pasta_provas = self.pasta_dados / "provas"
+        self.arquivo_provas = self.pasta_dados / "provas.txt"
         self.pasta_provas.mkdir(parents=True, exist_ok=True)
-        self._criar_catalogo_se_necessario()
+        if not self.arquivo_provas.exists():
+            self._gravar_csv(self.arquivo_provas, self.CABECALHOS["provas"], [])
+
         self.prova: Prova | None = None
         self.participantes: dict[str, Participante] = {}
         self.respostas: dict[str, list[str]] = {}
@@ -26,447 +37,412 @@ class CorretorProvas:
         self.registros_invalidos = 0
         self.inconsistencias: list[str] = []
 
-    def _criar_catalogo_se_necessario(self) -> None:
-        if not self.arquivo_provas.exists():
-            self.arquivo_provas.write_text(
-                "id;nome;disciplina;categoria\n", encoding="utf-8"
-            )
+    # ---------- Utilidades de arquivo e validação ----------
 
-    def listar_provas(self) -> list[Prova]:
-        provas: list[Prova] = []
-        with self.arquivo_provas.open(encoding="utf-8") as arquivo:
-            self._validar_cabecalho(
-                arquivo,
-                ["id", "nome", "disciplina", "categoria"],
-                self.arquivo_provas,
-            )
-            for numero_linha, linha in enumerate(arquivo, start=2):
-                if not linha.strip():
+    @staticmethod
+    def _gravar_csv(caminho: Path, cabecalho: list[str], linhas) -> None:
+        caminho.parent.mkdir(parents=True, exist_ok=True)
+        with caminho.open("w", encoding="utf-8", newline="") as arquivo:
+            escritor = csv.writer(arquivo, delimiter=";", lineterminator="\n")
+            escritor.writerow(cabecalho)
+            escritor.writerows(linhas)
+
+    @classmethod
+    def _ler_csv(cls, caminho: Path, tipo: str, colunas: int) -> list[list[str]]:
+        with Path(caminho).open(encoding="utf-8-sig", newline="") as arquivo:
+            leitor = csv.reader(arquivo, delimiter=";")
+            cabecalho = [c.strip().lower() for c in next(leitor, [])]
+            esperado = cls.CABECALHOS[tipo]
+            if cabecalho != esperado:
+                raise ValueError(
+                    f"Cabeçalho inválido em {Path(caminho).name}. Esperado: {';'.join(esperado)}."
+                )
+            linhas = []
+            for numero, campos in enumerate(leitor, start=2):
+                if not campos or not any(c.strip() for c in campos):
                     continue
-                campos = [campo.strip() for campo in linha.split(";")]
-                if len(campos) != 4 or not all(campos):
-                    raise ValueError(
-                        f"Linha {numero_linha} inválida em {self.arquivo_provas.name}."
-                    )
-                provas.append(Prova(*campos))
-        return provas
+                campos = [c.strip() for c in campos]
+                if len(campos) != colunas:
+                    raise ValueError(f"Linha {numero} inválida em {Path(caminho).name}.")
+                linhas.append(campos)
+            return linhas
+
+    @staticmethod
+    def _linhas_texto(caminho: Path) -> list[str]:
+        return [
+            linha.strip()
+            for linha in Path(caminho).read_text(encoding="utf-8-sig").splitlines()
+            if linha.strip()
+        ]
 
     @classmethod
     def _validar_identificador(cls, identificador: str, tipo: str) -> None:
         if not cls.PADRAO_IDENTIFICADOR.fullmatch(identificador):
-            raise ValueError(
-                f"O ID {tipo} deve conter apenas letras, números, _ ou -."
-            )
+            raise ValueError(f"O ID {tipo} deve conter apenas letras, números, _ ou -.")
 
     @staticmethod
     def _validar_campos_texto(**campos: str) -> None:
-        for nome_campo, valor in campos.items():
+        for nome, valor in campos.items():
             if not valor.strip():
-                raise ValueError(f"O campo {nome_campo} é obrigatório.")
-            if any(separador in valor for separador in (";", "\n", "\r")):
-                raise ValueError(
-                    f"O campo {nome_campo} não pode conter ponto e vírgula ou quebra de linha."
-                )
-
-    @staticmethod
-    def _validar_cabecalho(
-        arquivo, esperado: list[str], caminho: Path
-    ) -> None:
-        primeira_linha = next(arquivo, "").strip()
-        recebido = [campo.strip().lower() for campo in primeira_linha.split(";")]
-        if recebido != esperado:
-            raise ValueError(
-                f"Cabeçalho inválido em {caminho.name}. Esperado: {';'.join(esperado)}."
-            )
+                raise ValueError(f"O campo {nome} é obrigatório.")
+            if any(sep in valor for sep in (";", "\n", "\r")):
+                raise ValueError(f"O campo {nome} não pode conter ';' ou quebra de linha.")
 
     def _invalidar_resultados(self) -> None:
         self.resultados.clear()
-        if self.prova is None:
-            return
-        arquivo_resultados = self.pasta_atual / "resultados.csv"
-        if arquivo_resultados.exists():
-            arquivo_resultados.unlink()
+        if self.prova:
+            arquivo = self.pasta_atual / "resultados.csv"
+            if arquivo.exists():
+                arquivo.unlink()
 
-    def criar_prova(
-        self, identificador: str, nome: str, disciplina: str, categoria: str
-    ) -> None:
+    @property
+    def pasta_atual(self) -> Path:
+        if not self.prova:
+            raise ValueError("Selecione ou cadastre uma prova primeiro.")
+        return self.pasta_provas / self.prova.identificador
+
+    # ---------- Provas ----------
+
+    def listar_provas(self) -> list[Prova]:
+        provas = []
+        for numero, campos in enumerate(
+            self._ler_csv(self.arquivo_provas, "provas", 4), start=2
+        ):
+            if not all(campos):
+                raise ValueError(f"Linha {numero} inválida em {self.arquivo_provas.name}.")
+            provas.append(Prova(*campos))
+        return provas
+
+    def criar_prova(self, identificador: str, nome: str, disciplina: str, categoria: str) -> None:
         identificador = identificador.strip().upper()
         self._validar_identificador(identificador, "da olimpíada/prova")
-        if any(prova.identificador == identificador for prova in self.listar_provas()):
+        self._validar_campos_texto(nome=nome, disciplina=disciplina, categoria=categoria)
+        if any(p.identificador == identificador for p in self.listar_provas()):
             raise ValueError(f"Já existe uma prova com o ID {identificador}.")
-        self._validar_campos_texto(
-            nome=nome, disciplina=disciplina, categoria=categoria
-        )
 
         pasta = self.pasta_provas / identificador
         if pasta.exists():
             raise ValueError(f"A pasta da prova {identificador} já existe.")
-        pasta.mkdir(parents=True, exist_ok=False)
-        (pasta / "gabarito.txt").write_text(
-            "numero;respostas_aceitas;peso;dificuldade;anulada\n",
-            encoding="utf-8",
+        pasta.mkdir(parents=True)
+        self._gravar_csv(pasta / "gabarito.txt", self.CABECALHOS["gabarito"], [])
+        self._gravar_csv(pasta / "participantes.txt", self.CABECALHOS["participantes"], [])
+        self._gravar_csv(pasta / "respostas.txt", self.CABECALHOS["respostas"], [])
+        self._gravar_csv(
+            pasta / "historico.txt",
+            ["id", "data_hora", "registros_corrigidos", "media"],
+            [],
         )
-        (pasta / "participantes.txt").write_text(
-            "id;nome;categoria\n", encoding="utf-8"
-        )
-        (pasta / "respostas.txt").write_text(
-            "participante_id;respostas\n", encoding="utf-8"
-        )
-        (pasta / "historico.txt").write_text(
-            "id;data_hora;registros_corrigidos;media\n", encoding="utf-8"
-        )
-        with self.arquivo_provas.open("a", encoding="utf-8") as arquivo:
-            arquivo.write(
-                f"{identificador};{nome.strip()};{disciplina.strip()};{categoria.strip()}\n"
+        with self.arquivo_provas.open("a", encoding="utf-8", newline="") as arquivo:
+            csv.writer(arquivo, delimiter=";", lineterminator="\n").writerow(
+                [identificador, nome.strip(), disciplina.strip(), categoria.strip()]
             )
         self.selecionar_prova(identificador)
 
     def selecionar_prova(self, identificador: str) -> None:
         identificador = identificador.strip().upper()
-        prova = next(
-            (p for p in self.listar_provas() if p.identificador == identificador),
-            None,
-        )
-        if prova is None:
+        prova = next((p for p in self.listar_provas() if p.identificador == identificador), None)
+        if not prova:
             raise ValueError(f"Prova {identificador} não encontrada.")
-
-        pasta = self.pasta_provas / prova.identificador
-        if not pasta.is_dir():
-            raise ValueError(
-                f"A pasta de dados da prova {identificador} não foi encontrada."
-            )
+        if not (self.pasta_provas / identificador).is_dir():
+            raise ValueError(f"A pasta de dados da prova {identificador} não foi encontrada.")
 
         self.prova = prova
         self.participantes.clear()
         self.respostas.clear()
         self.resultados.clear()
-        self.registros_validos = 0
-        self.registros_invalidos = 0
         self.inconsistencias.clear()
+        self.registros_validos = self.registros_invalidos = 0
 
+        pasta = self.pasta_atual
         if (pasta / "gabarito.txt").exists():
             self.importar_gabarito(pasta / "gabarito.txt", salvar=False)
         if (pasta / "participantes.txt").exists():
             self.importar_participantes(pasta / "participantes.txt", salvar=False)
-        if (pasta / "respostas.txt").exists() and self.prova.questoes:
+        if self.prova.questoes and (pasta / "respostas.txt").exists():
             self.importar_respostas(pasta / "respostas.txt", salvar=False)
-        arquivo_inconsistencias = pasta / "inconsistencias.txt"
-        if arquivo_inconsistencias.exists():
-            self.inconsistencias = [
-                linha.strip()
-                for linha in arquivo_inconsistencias.read_text(
-                    encoding="utf-8"
-                ).splitlines()
-                if linha.strip()
-            ]
+        if (pasta / "inconsistencias.txt").exists():
+            self.inconsistencias = self._linhas_texto(pasta / "inconsistencias.txt")
             self.registros_invalidos = len(self.inconsistencias)
-        if self.respostas and self.prova.questoes:
+        if self.respostas:
             self.corrigir(registrar_historico=False)
 
-    @property
-    def pasta_atual(self) -> Path:
-        if self.prova is None:
-            raise ValueError("Selecione ou cadastre uma prova primeiro.")
-        return self.pasta_provas / self.prova.identificador
+    # ---------- Participantes ----------
 
     def importar_participantes(self, caminho: Path, salvar: bool = True) -> None:
         novos: dict[str, Participante] = {}
-        with caminho.open(encoding="utf-8-sig") as arquivo:
-            self._validar_cabecalho(
-                arquivo, ["id", "nome", "categoria"], caminho
-            )
-            for numero_linha, linha in enumerate(arquivo, start=2):
-                if not linha.strip():
-                    continue
-                campos = [campo.strip() for campo in linha.split(";")]
-                if len(campos) != 3:
-                    raise ValueError(f"Linha {numero_linha} inválida em {caminho.name}.")
-                identificador, nome, categoria = campos
-                identificador = identificador.upper()
-                try:
-                    self._validar_identificador(identificador, "do participante")
-                    self._validar_campos_texto(nome=nome, categoria=categoria)
-                except ValueError as erro:
-                    raise ValueError(f"Linha {numero_linha}: {erro}") from erro
-                if identificador in novos:
-                    raise ValueError(f"ID duplicado: {identificador}.")
-                novos[identificador] = Participante(identificador, nome, categoria)
+        for numero, (identificador, nome, categoria) in enumerate(
+            self._ler_csv(caminho, "participantes", 3), start=2
+        ):
+            identificador = identificador.upper()
+            try:
+                self._validar_identificador(identificador, "do participante")
+                self._validar_campos_texto(nome=nome, categoria=categoria)
+            except ValueError as erro:
+                raise ValueError(f"Linha {numero}: {erro}") from erro
+            if identificador in novos:
+                raise ValueError(f"ID duplicado: {identificador}.")
+            novos[identificador] = Participante(identificador, nome, categoria)
         self.participantes = novos
         if salvar:
             self.salvar_participantes()
 
-    def salvar_participantes(self) -> None:
-        self._invalidar_resultados()
-        caminho = self.pasta_atual / "participantes.txt"
-        with caminho.open("w", encoding="utf-8", newline="") as arquivo:
-            escritor = csv.writer(arquivo, delimiter=";", lineterminator="\n")
-            escritor.writerow(["id", "nome", "categoria"])
-            for participante in self.participantes.values():
-                escritor.writerow(
-                    [participante.identificador, participante.nome, participante.categoria]
-                )
-
-    def cadastrar_participante(
-        self, identificador: str, nome: str, categoria: str
-    ) -> None:
+    def cadastrar_participante(self, identificador: str, nome: str, categoria: str) -> None:
         identificador = identificador.strip().upper()
         self._validar_identificador(identificador, "do participante")
+        self._validar_campos_texto(nome=nome, categoria=categoria)
         if identificador in self.participantes:
             raise ValueError("Este ID já está cadastrado.")
-        self._validar_campos_texto(nome=nome, categoria=categoria)
         self.participantes[identificador] = Participante(
             identificador, nome.strip(), categoria.strip()
         )
         self.salvar_participantes()
 
-    def importar_gabarito(self, caminho: Path, salvar: bool = True) -> None:
-        if self.prova is None:
-            raise ValueError("Selecione uma prova primeiro.")
-        questoes: list[Questao] = []
-        numeros: set[int] = set()
-        with caminho.open(encoding="utf-8-sig") as arquivo:
-            self._validar_cabecalho(
-                arquivo,
-                ["numero", "respostas_aceitas", "peso", "dificuldade", "anulada"],
-                caminho,
-            )
-            for numero_linha, linha in enumerate(arquivo, start=2):
-                if not linha.strip():
-                    continue
-                campos = [campo.strip() for campo in linha.split(";")]
-                if len(campos) != 5:
-                    raise ValueError(f"Linha {numero_linha} inválida em {caminho.name}.")
-                numero_texto, respostas, peso_texto, dificuldade, anulada = campos
-                try:
-                    numero = int(numero_texto)
-                    peso = float(peso_texto)
-                except ValueError as erro:
-                    raise ValueError(
-                        f"Linha {numero_linha}: número ou peso inválido."
-                    ) from erro
-                if numero < 1:
-                    raise ValueError(
-                        f"Linha {numero_linha}: o número da questão deve ser positivo."
-                    )
-                if numero in numeros:
-                    raise ValueError(f"Questão duplicada: {numero}.")
-                numeros.add(numero)
-                respostas_aceitas = [r.strip().upper() for r in respostas.split("|")]
-                self._validar_questao(respostas_aceitas, peso, dificuldade)
-                anulada_normalizada = anulada.upper()
-                if anulada_normalizada not in {"SIM", "S", "NAO", "N", "NÃO"}:
-                    raise ValueError(
-                        f"Linha {numero_linha}: anulada deve ser SIM ou NAO."
-                    )
-                questoes.append(
-                    Questao(
-                        numero,
-                        respostas_aceitas,
-                        peso,
-                        dificuldade.upper(),
-                        anulada_normalizada in {"SIM", "S"},
-                    )
-                )
-        if not questoes and salvar:
-            raise ValueError("O arquivo de gabarito não possui questões.")
-        self.prova.questoes = sorted(questoes, key=lambda questao: questao.numero)
-        if salvar:
-            self.salvar_gabarito()
+    def salvar_participantes(self) -> None:
+        self._invalidar_resultados()
+        linhas = (
+            (p.identificador, p.nome, p.categoria) for p in self.participantes.values()
+        )
+        self._gravar_csv(self.pasta_atual / "participantes.txt", self.CABECALHOS["participantes"], linhas)
 
-    def _validar_questao(
-        self, respostas_aceitas: list[str], peso: float, dificuldade: str
-    ) -> None:
-        if not respostas_aceitas or not set(respostas_aceitas).issubset(
-            self.ALTERNATIVAS_VALIDAS
-        ):
+    # ---------- Gabarito ----------
+
+    def _validar_questao(self, respostas: list[str], peso: float, dificuldade: str) -> None:
+        if not respostas or not set(respostas).issubset(self.ALTERNATIVAS_VALIDAS):
             raise ValueError("As respostas devem utilizar apenas A, B, C, D ou E.")
         if not isfinite(peso) or peso <= 0:
             raise ValueError("O peso deve ser maior que zero.")
-        if dificuldade.upper() not in {"FACIL", "MEDIA", "DIFICIL"}:
+        if dificuldade.upper() not in self.DIFICULDADES:
             raise ValueError("A dificuldade deve ser FACIL, MEDIA ou DIFICIL.")
 
+    def _gabarito_simples(self, caminho: Path) -> list[Questao]:
+        """Aceita, por exemplo: '1- resposta: A', '2;B', '3:C' ou uma letra por linha."""
+        questoes = []
+        padrao = re.compile(
+            r"^(?:(\d+)\s*(?:[-:;])\s*(?:resposta\s*:?)?\s*)?([A-E](?:\s*[|/]\s*[A-E])*)$",
+            re.I,
+        )
+        for posicao, linha in enumerate(self._linhas_texto(caminho), start=1):
+            encontrado = padrao.fullmatch(linha)
+            if not encontrado:
+                raise ValueError(
+                    f"Linha {posicao} inválida em {Path(caminho).name}. "
+                    "Use o modelo completo ou linhas como '1- resposta: A'."
+                )
+            numero = int(encontrado.group(1) or posicao)
+            respostas = re.split(r"\s*[|/]\s*", encontrado.group(2).upper())
+            questoes.append(Questao(numero, respostas, 1.0, "MEDIA", False))
+        return questoes
+
+    def importar_gabarito(self, caminho: Path, salvar: bool = True) -> None:
+        if not self.prova:
+            raise ValueError("Selecione uma prova primeiro.")
+        linhas = self._linhas_texto(caminho)
+        if not linhas:
+            if salvar:
+                raise ValueError("O arquivo de gabarito está vazio.")
+            self.prova.questoes = []
+            return
+
+        esperado = ";".join(self.CABECALHOS["gabarito"])
+        if linhas[0].lower() == esperado:
+            questoes = []
+            for numero_linha, campos in enumerate(
+                self._ler_csv(caminho, "gabarito", 5), start=2
+            ):
+                numero_txt, respostas_txt, peso_txt, dificuldade, anulada = campos
+                try:
+                    numero, peso = int(numero_txt), float(peso_txt.replace(",", "."))
+                except ValueError as erro:
+                    raise ValueError(f"Linha {numero_linha}: número ou peso inválido.") from erro
+                respostas = [r.strip().upper() for r in respostas_txt.split("|")]
+                self._validar_questao(respostas, peso, dificuldade)
+                anulada = anulada.upper()
+                if anulada not in {"SIM", "S", "NAO", "N", "NÃO"}:
+                    raise ValueError(f"Linha {numero_linha}: anulada deve ser SIM ou NAO.")
+                questoes.append(Questao(numero, respostas, peso, dificuldade.upper(), anulada in {"SIM", "S"}))
+        else:
+            # Um texto que parece ter cabeçalho, mas não é o correto, deve falhar claramente.
+            if ";" in linhas[0] and not re.match(r"^\d", linhas[0]):
+                raise ValueError(f"Cabeçalho inválido em {Path(caminho).name}. Esperado: {esperado}.")
+            questoes = self._gabarito_simples(caminho)
+
+        numeros = [q.numero for q in questoes]
+        if not questoes and salvar:
+            raise ValueError("O arquivo de gabarito não possui questões.")
+        if any(n < 1 for n in numeros):
+            raise ValueError("O número da questão deve ser positivo.")
+        if len(set(numeros)) != len(numeros):
+            raise ValueError("Há número de questão duplicado no gabarito.")
+        self.prova.questoes = sorted(questoes, key=lambda q: q.numero)
+        if salvar:
+            self.salvar_gabarito()
+
     def definir_gabarito(self, questoes: list[Questao]) -> None:
-        if self.prova is None:
+        if not self.prova:
             raise ValueError("Selecione uma prova primeiro.")
         if not questoes:
             raise ValueError("O gabarito deve possuir pelo menos uma questão.")
-        numeros: set[int] = set()
+        numeros = set()
         for questao in questoes:
-            if questao.numero < 1:
-                raise ValueError("O número da questão deve ser positivo.")
-            if questao.numero in numeros:
-                raise ValueError(f"Questão duplicada: {questao.numero}.")
+            if questao.numero < 1 or questao.numero in numeros:
+                raise ValueError(f"Questão inválida ou duplicada: {questao.numero}.")
             numeros.add(questao.numero)
-            self._validar_questao(
-                questao.respostas_aceitas, questao.peso, questao.dificuldade
-            )
-        self.prova.questoes = sorted(questoes, key=lambda questao: questao.numero)
+            questao.respostas_aceitas = [r.upper() for r in questao.respostas_aceitas]
+            self._validar_questao(questao.respostas_aceitas, questao.peso, questao.dificuldade)
+        self.prova.questoes = sorted(questoes, key=lambda q: q.numero)
         self.salvar_gabarito()
 
     def salvar_gabarito(self) -> None:
-        if self.prova is None:
+        if not self.prova:
             raise ValueError("Selecione uma prova primeiro.")
         self._invalidar_resultados()
-        caminho = self.pasta_atual / "gabarito.txt"
-        with caminho.open("w", encoding="utf-8", newline="") as arquivo:
-            escritor = csv.writer(arquivo, delimiter=";", lineterminator="\n")
-            escritor.writerow(
-                ["numero", "respostas_aceitas", "peso", "dificuldade", "anulada"]
-            )
-            for questao in self.prova.questoes:
-                escritor.writerow(
-                    [
-                        questao.numero,
-                        "|".join(questao.respostas_aceitas),
-                        f"{questao.peso:.2f}",
-                        questao.dificuldade,
-                        "SIM" if questao.anulada else "NAO",
-                    ]
-                )
+        linhas = (
+            (q.numero, "|".join(q.respostas_aceitas), f"{q.peso:.2f}", q.dificuldade, "SIM" if q.anulada else "NAO")
+            for q in self.prova.questoes
+        )
+        self._gravar_csv(self.pasta_atual / "gabarito.txt", self.CABECALHOS["gabarito"], linhas)
 
-    def importar_respostas(self, caminho: Path, salvar: bool = True) -> list[str]:
-        if self.prova is None or not self.prova.questoes:
-            raise ValueError("Cadastre o gabarito antes de importar as respostas.")
-        respostas_validas: dict[str, list[str]] = {}
-        inconsistencias: list[str] = []
-        with caminho.open(encoding="utf-8-sig") as arquivo:
-            self._validar_cabecalho(
-                arquivo, ["participante_id", "respostas"], caminho
-            )
-            for numero_linha, linha in enumerate(arquivo, start=2):
-                if not linha.strip():
-                    continue
-                campos = [campo.strip() for campo in linha.split(";", maxsplit=1)]
-                if len(campos) != 2:
-                    inconsistencias.append(f"Linha {numero_linha}: formato inválido")
-                    continue
-                participante_id, texto_respostas = campos
-                participante_id = participante_id.upper()
-                respostas = [r.strip().upper() for r in texto_respostas.split(",")]
-                erro = self._validar_respostas(
-                    participante_id, respostas, respostas_validas
+    # ---------- Respostas ----------
+
+    def _validar_respostas(self, participante_id: str, respostas: list[str], existentes: dict[str, list[str]]) -> str | None:
+        if participante_id not in self.participantes:
+            return f"participante {participante_id} não cadastrado"
+        if participante_id in existentes:
+            return f"participante {participante_id} duplicado"
+        if len(respostas) != len(self.prova.questoes):
+            return "quantidade de respostas diferente da quantidade de questões"
+        invalida = next((r for r in respostas if r not in self.ALTERNATIVAS_VALIDAS and r != "-"), None)
+        return f"alternativa inválida: {invalida}" if invalida else None
+
+    def _respostas_simples(self, caminho: Path) -> list[str]:
+        linhas = self._linhas_texto(caminho)
+        if len(linhas) == 1 and "," in linhas[0]:
+            return [r.strip().upper() for r in linhas[0].split(",")]
+
+        respostas = []
+        padrao = re.compile(r"^(?:(\d+)\s*(?:[-:;])\s*(?:resposta\s*:?)?\s*)?([A-E-])$", re.I)
+        for posicao, linha in enumerate(linhas, start=1):
+            encontrado = padrao.fullmatch(linha)
+            if not encontrado:
+                raise ValueError(
+                    f"Linha {posicao} inválida em {Path(caminho).name}. "
+                    "Use A-E (ou -) e, opcionalmente, '1- resposta: A'."
                 )
+            numero = int(encontrado.group(1) or posicao)
+            if numero != posicao:
+                raise ValueError(f"Linha {posicao}: esperada a questão {posicao}, recebida {numero}.")
+            respostas.append(encontrado.group(2).upper())
+        return respostas
+
+    def importar_respostas(self, caminho: Path, salvar: bool = True, participante_id: str | None = None) -> list[str]:
+        if not self.prova or not self.prova.questoes:
+            raise ValueError("Cadastre o gabarito antes de importar as respostas.")
+        linhas = self._linhas_texto(caminho)
+        if not linhas:
+            raise ValueError("O arquivo de respostas está vazio.")
+
+        validas: dict[str, list[str]] = {}
+        inconsistencias: list[str] = []
+        cabecalho = ";".join(self.CABECALHOS["respostas"])
+
+        if linhas[0].lower() == cabecalho:
+            for numero_linha, (pid, texto) in enumerate(self._ler_csv(caminho, "respostas", 2), start=2):
+                pid = pid.upper()
+                respostas = [r.strip().upper() for r in texto.split(",")]
+                erro = self._validar_respostas(pid, respostas, validas)
                 if erro:
                     inconsistencias.append(f"Linha {numero_linha}: {erro}")
                 else:
-                    respostas_validas[participante_id] = respostas
-        self.respostas = respostas_validas
+                    validas[pid] = respostas
+        else:
+            pid = (participante_id or "").strip().upper()
+            if not pid and len(self.participantes) == 1:
+                pid = next(iter(self.participantes))
+            if not pid:
+                raise ValueError(
+                    "Arquivo de respostas individuais detectado. Informe o ID do participante na importação."
+                )
+            # Arquivo individual atualiza só esse participante; não apaga os demais já importados.
+            validas = dict(self.respostas)
+            validas.pop(pid, None)
+            respostas = self._respostas_simples(caminho)
+            erro = self._validar_respostas(pid, respostas, validas)
+            if erro:
+                inconsistencias.append(f"{pid}: {erro}")
+            else:
+                validas[pid] = respostas
+
+        self.respostas = validas
         self.inconsistencias = inconsistencias
-        self.registros_validos = len(respostas_validas)
+        self.registros_validos = len(validas)
         self.registros_invalidos = len(inconsistencias)
         if salvar:
             self.salvar_respostas()
             self.salvar_inconsistencias()
         return inconsistencias
 
-    def _validar_respostas(
-        self,
-        participante_id: str,
-        respostas: list[str],
-        respostas_existentes: dict[str, list[str]] | None = None,
-    ) -> str | None:
-        if respostas_existentes is None:
-            respostas_existentes = self.respostas
-        if participante_id not in self.participantes:
-            return f"participante {participante_id} não cadastrado"
-        if participante_id in respostas_existentes:
-            return f"respostas duplicadas para {participante_id}"
-        if self.prova is None or len(respostas) != len(self.prova.questoes):
-            return "quantidade de respostas diferente da quantidade de questões"
-        invalidas = [
-            resposta
-            for resposta in respostas
-            if resposta not in self.ALTERNATIVAS_VALIDAS and resposta != "-"
-        ]
-        if invalidas:
-            return f"alternativa inválida: {invalidas[0]}"
-        return None
-
     def registrar_respostas(self, participante_id: str, respostas: list[str]) -> None:
         participante_id = participante_id.strip().upper()
-        respostas = [resposta.strip().upper() for resposta in respostas]
+        respostas = [r.strip().upper() for r in respostas]
         existentes = dict(self.respostas)
-        existentes.pop(participante_id, None)
+        existentes.pop(participante_id, None)  # permite atualizar as respostas do aluno
         erro = self._validar_respostas(participante_id, respostas, existentes)
         if erro:
             raise ValueError(erro)
         self.respostas[participante_id] = respostas
         self.registros_validos = len(self.respostas)
-        self.resultados.clear()
         self.salvar_respostas()
 
     def salvar_respostas(self) -> None:
         self._invalidar_resultados()
-        caminho = self.pasta_atual / "respostas.txt"
-        with caminho.open("w", encoding="utf-8", newline="") as arquivo:
-            escritor = csv.writer(arquivo, delimiter=";", lineterminator="\n")
-            escritor.writerow(["participante_id", "respostas"])
-            for participante_id, respostas in self.respostas.items():
-                escritor.writerow([participante_id, ",".join(respostas)])
+        linhas = ((pid, ",".join(respostas)) for pid, respostas in self.respostas.items())
+        self._gravar_csv(self.pasta_atual / "respostas.txt", self.CABECALHOS["respostas"], linhas)
 
     def salvar_inconsistencias(self) -> None:
-        caminho = self.pasta_atual / "inconsistencias.txt"
         texto = "\n".join(self.inconsistencias)
-        caminho.write_text(texto + ("\n" if texto else ""), encoding="utf-8")
+        (self.pasta_atual / "inconsistencias.txt").write_text(
+            texto + ("\n" if texto else ""), encoding="utf-8"
+        )
+
+    # ---------- Correção, resultados e histórico ----------
 
     def corrigir(self, registrar_historico: bool = True) -> list[Resultado]:
-        if self.prova is None or not self.prova.questoes:
+        if not self.prova or not self.prova.questoes:
             raise ValueError("Cadastre o gabarito antes de corrigir.")
         if not self.respostas:
             raise ValueError("Importe ou registre respostas antes de corrigir.")
-        incompatibilidades: list[str] = []
-        for participante_id, respostas in self.respostas.items():
-            if participante_id not in self.participantes:
-                incompatibilidades.append(
-                    f"participante {participante_id} não cadastrado"
-                )
-            elif len(respostas) != len(self.prova.questoes):
-                incompatibilidades.append(
-                    f"{participante_id} possui {len(respostas)} respostas, "
-                    f"mas o gabarito possui {len(self.prova.questoes)} questões"
-                )
-            else:
-                invalidas = [
-                    resposta
-                    for resposta in respostas
-                    if resposta not in self.ALTERNATIVAS_VALIDAS and resposta != "-"
-                ]
-                if invalidas:
-                    incompatibilidades.append(
-                        f"{participante_id} possui alternativa inválida: {invalidas[0]}"
-                    )
+
+        incompatibilidades = []
+        for pid, respostas in self.respostas.items():
+            erro = self._validar_respostas(pid, respostas, {})
+            if erro:
+                incompatibilidades.append(f"{pid}: {erro}")
         if incompatibilidades:
             detalhes = "; ".join(incompatibilidades[:3])
             if len(incompatibilidades) > 3:
                 detalhes += f"; e mais {len(incompatibilidades) - 3} ocorrência(s)"
-            raise ValueError(
-                "As respostas não são compatíveis com os dados atuais: "
-                f"{detalhes}. Reimporte ou corrija as respostas."
-            )
-        self.resultados.clear()
-        for participante_id, respostas in self.respostas.items():
-            participante = self.participantes[participante_id]
-            pontuacao = 0.0
-            acertos = 0
-            erros = 0
-            detalhes: list[str] = []
+            raise ValueError(f"As respostas não são compatíveis com os dados atuais: {detalhes}. Reimporte ou corrija as respostas.")
+
+        self.resultados = []
+        for pid, respostas in self.respostas.items():
+            participante = self.participantes[pid]
+            pontos = acertos = erros = 0
+            detalhes = []
             for questao, resposta in zip(self.prova.questoes, respostas):
                 correta = questao.esta_correta(resposta)
                 situacao = "ANULADA" if questao.anulada else ("ACERTO" if correta else "ERRO")
                 if correta:
-                    pontuacao += questao.peso
+                    pontos += questao.peso
                     acertos += 1
                 else:
                     erros += 1
                 detalhes.append(
-                    f"Q{questao.numero}: resposta={resposta}, "
-                    f"gabarito={'/'.join(questao.respostas_aceitas)}, "
+                    f"Q{questao.numero}: resposta={resposta}, gabarito={'/'.join(questao.respostas_aceitas)}, "
                     f"situação={situacao}, peso={questao.peso:.2f}"
                 )
-            self.resultados.append(
-                Resultado(participante, pontuacao, acertos, erros, detalhes)
-            )
-        self.resultados.sort(key=lambda resultado: resultado.pontuacao, reverse=True)
+            self.resultados.append(Resultado(participante, float(pontos), acertos, erros, detalhes))
+
+        self.resultados.sort(key=lambda r: r.pontuacao, reverse=True)
         self.exportar_resultados()
         if registrar_historico:
             self.registrar_historico()
@@ -475,74 +451,41 @@ class CorretorProvas:
     def exportar_resultados(self, caminho: Path | None = None) -> Path:
         if not self.resultados:
             raise ValueError("Execute a correção antes de exportar.")
-        caminho = caminho or (self.pasta_atual / "resultados.csv")
-        with caminho.open("w", newline="", encoding="utf-8-sig") as arquivo:
-            escritor = csv.writer(arquivo, delimiter=";")
-            escritor.writerow(
-                ["posicao", "id", "nome", "categoria", "pontuacao", "acertos", "erros"]
-            )
-            for posicao, resultado in enumerate(self.resultados, start=1):
-                escritor.writerow(
-                    [
-                        posicao,
-                        resultado.participante.identificador,
-                        resultado.participante.nome,
-                        resultado.participante.categoria,
-                        f"{resultado.pontuacao:.2f}",
-                        resultado.acertos,
-                        resultado.erros,
-                    ]
-                )
+        caminho = Path(caminho) if caminho else self.pasta_atual / "resultados.csv"
+        linhas = (
+            (pos, r.participante.identificador, r.participante.nome, r.participante.categoria,
+             f"{r.pontuacao:.2f}", r.acertos, r.erros)
+            for pos, r in enumerate(self.resultados, 1)
+        )
+        self._gravar_csv(caminho, ["posicao", "id", "nome", "categoria", "pontuacao", "acertos", "erros"], linhas)
         return caminho
 
     def registrar_historico(self) -> None:
+        historico = self.ler_historico()
+        identificador = f"CORR{len(historico) + 1:03d}"
+        media = sum(r.pontuacao for r in self.resultados) / len(self.resultados)
         caminho = self.pasta_atual / "historico.txt"
-        registros = self.ler_historico()
-        identificador = f"CORR{len(registros) + 1:03d}"
-        media = sum(resultado.pontuacao for resultado in self.resultados) / len(
-            self.resultados
-        )
         if not caminho.exists() or not caminho.read_text(encoding="utf-8").strip():
-            caminho.write_text(
-                "id;data_hora;registros_corrigidos;media\n", encoding="utf-8"
+            self._gravar_csv(caminho, ["id", "data_hora", "registros_corrigidos", "media"], [])
+        with caminho.open("a", encoding="utf-8", newline="") as arquivo:
+            csv.writer(arquivo, delimiter=";", lineterminator="\n").writerow(
+                [identificador, datetime.now().strftime("%d/%m/%Y %H:%M:%S"), len(self.resultados), f"{media:.2f}"]
             )
-        with caminho.open("a", encoding="utf-8") as arquivo:
-            data = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
-            arquivo.write(
-                f"{identificador};{data};{len(self.resultados)};{media:.2f}\n"
-            )
-
-        pasta_historico = self.pasta_atual / "historico"
-        pasta_historico.mkdir(exist_ok=True)
-        shutil.copyfile(
-            self.pasta_atual / "resultados.csv",
-            pasta_historico / f"{identificador}_resultados.csv",
-        )
-        shutil.copyfile(
-            self.pasta_atual / "gabarito.txt",
-            pasta_historico / f"{identificador}_gabarito.txt",
-        )
+        pasta = self.pasta_atual / "historico"
+        pasta.mkdir(exist_ok=True)
+        shutil.copyfile(self.pasta_atual / "resultados.csv", pasta / f"{identificador}_resultados.csv")
+        shutil.copyfile(self.pasta_atual / "gabarito.txt", pasta / f"{identificador}_gabarito.txt")
 
     def ler_historico(self) -> list[dict[str, str]]:
         caminho = self.pasta_atual / "historico.txt"
         if not caminho.exists():
             return []
-        with caminho.open(encoding="utf-8") as arquivo:
-            linhas = [linha.strip() for linha in arquivo if linha.strip()]
-        if len(linhas) <= 1:
-            return []
-        registros: list[dict[str, str]] = []
+        linhas = self._linhas_texto(caminho)
+        registros = []
         for linha in linhas[1:]:
             campos = linha.split(";")
             if len(campos) == 4:
-                registros.append(
-                    {
-                        "id": campos[0],
-                        "data_hora": campos[1],
-                        "quantidade": campos[2],
-                        "media": campos[3],
-                    }
-                )
+                registros.append(dict(zip(("id", "data_hora", "quantidade", "media"), campos)))
         return registros
 
     def detalhes_historico(self, identificador: str) -> tuple[list[str], list[str]]:
@@ -559,42 +502,22 @@ class CorretorProvas:
 
     def buscar_resultado(self, participante_id: str) -> Resultado | None:
         participante_id = participante_id.strip().upper()
-        return next(
-            (
-                resultado
-                for resultado in self.resultados
-                if resultado.participante.identificador == participante_id
-            ),
-            None,
-        )
+        return next((r for r in self.resultados if r.participante.identificador == participante_id), None)
 
     def estatisticas_questoes(self) -> list[tuple[int, float, float]]:
-        if not self.resultados or self.prova is None:
+        if not self.resultados or not self.prova:
             raise ValueError("Execute a correção antes de gerar estatísticas.")
         quantidade = len(self.resultados)
-        tamanho_grupo = max(1, round(quantidade * 0.27))
-        ids_superiores = {
-            resultado.participante.identificador
-            for resultado in self.resultados[:tamanho_grupo]
-        }
-        ids_inferiores = {
-            resultado.participante.identificador
-            for resultado in self.resultados[-tamanho_grupo:]
-        }
-        estatisticas: list[tuple[int, float, float]] = []
+        grupo = max(1, round(quantidade * 0.27))
+        superiores = {r.participante.identificador for r in self.resultados[:grupo]}
+        inferiores = {r.participante.identificador for r in self.resultados[-grupo:]}
+        dados = []
         for indice, questao in enumerate(self.prova.questoes):
-            acertos = sum(
-                questao.esta_correta(respostas[indice])
-                for respostas in self.respostas.values()
+            acerto = lambda pid: questao.esta_correta(self.respostas[pid][indice])
+            taxa = sum(acerto(pid) for pid in self.respostas) / quantidade
+            discriminacao = (
+                sum(acerto(pid) for pid in superiores) / grupo
+                - sum(acerto(pid) for pid in inferiores) / grupo
             )
-            taxa = acertos / quantidade
-            superiores = sum(
-                questao.esta_correta(self.respostas[identificador][indice])
-                for identificador in ids_superiores
-            ) / tamanho_grupo
-            inferiores = sum(
-                questao.esta_correta(self.respostas[identificador][indice])
-                for identificador in ids_inferiores
-            ) / tamanho_grupo
-            estatisticas.append((questao.numero, taxa, superiores - inferiores))
-        return estatisticas
+            dados.append((questao.numero, taxa, discriminacao))
+        return dados
