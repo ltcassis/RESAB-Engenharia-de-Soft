@@ -1,14 +1,16 @@
+#regras de negócio, validações, importação, persistência, correção e relatórios
 import csv
-import re
-import shutil
+import re                                                                                                #verifica padrãos em strings
+import shutil                                                                                            #manipula arquivos e pastas
 from datetime import datetime
 from math import isfinite
-from pathlib import Path
+from pathlib import Path 
+
 
 from modelos import Participante, Prova, Questao, Resultado
 
 
-class CorretorProvas:
+class CorretorProvas:                                                                                                  #coordena correção e relatorios
     """Regras, persistência e correção das provas."""
 
     ALTERNATIVAS_VALIDAS = set("ABCDE")
@@ -21,8 +23,8 @@ class CorretorProvas:
         "respostas": ["participante_id", "respostas"],
     }
 
-    def __init__(self, pasta_dados: Path) -> None:
-        self.pasta_dados = Path(pasta_dados)
+    def __init__(self, pasta_dados: Path) -> None:                                                                    #inicializa o corretor e dfine pasta de dados
+        self.pasta_dados = Path(pasta_dados)                                                                          
         self.pasta_provas = self.pasta_dados / "provas"
         self.arquivo_provas = self.pasta_dados / "provas.txt"
         self.pasta_provas.mkdir(parents=True, exist_ok=True)
@@ -39,16 +41,16 @@ class CorretorProvas:
 
     # ---------- Utilidades de arquivo e validação ----------
 
-    @staticmethod
-    def _gravar_csv(caminho: Path, cabecalho: list[str], linhas) -> None:
+    @staticmethod                                                                                                            #metodo auxiliar q n usa self
+    def _gravar_csv(caminho: Path, cabecalho: list[str], linhas) -> None:                                                    #grava dados em um csv
         caminho.parent.mkdir(parents=True, exist_ok=True)
         with caminho.open("w", encoding="utf-8", newline="") as arquivo:
             escritor = csv.writer(arquivo, delimiter=";", lineterminator="\n")
             escritor.writerow(cabecalho)
             escritor.writerows(linhas)
 
-    @classmethod
-    def _ler_csv(cls, caminho: Path, tipo: str, colunas: int) -> list[list[str]]:
+    @classmethod                                                                                                             #metodo q usa propria class
+    def _ler_csv(cls, caminho: Path, tipo: str, colunas: int) -> list[list[str]]:                                            #le dados de arqv csv
         with Path(caminho).open(encoding="utf-8-sig", newline="") as arquivo:
             leitor = csv.reader(arquivo, delimiter=";")
             cabecalho = [c.strip().lower() for c in next(leitor, [])]
@@ -68,7 +70,7 @@ class CorretorProvas:
             return linhas
 
     @staticmethod
-    def _linhas_texto(caminho: Path) -> list[str]:
+    def _linhas_texto(caminho: Path) -> list[str]:                                                                        #coverte texto em linhas p leitura
         return [
             linha.strip()
             for linha in Path(caminho).read_text(encoding="utf-8-sig").splitlines()
@@ -81,29 +83,29 @@ class CorretorProvas:
             raise ValueError(f"O ID {tipo} deve conter apenas letras, números, _ ou -.")
 
     @staticmethod
-    def _validar_campos_texto(**campos: str) -> None:
+    def _validar_campos_texto(**campos: str) -> None:                                                                    #valida campos de texto antes de salvar
         for nome, valor in campos.items():
             if not valor.strip():
                 raise ValueError(f"O campo {nome} é obrigatório.")
             if any(sep in valor for sep in (";", "\n", "\r")):
                 raise ValueError(f"O campo {nome} não pode conter ';' ou quebra de linha.")
 
-    def _invalidar_resultados(self) -> None:
+    def _invalidar_resultados(self) -> None:                                                                                #invalida resultados q ser recalculado
         self.resultados.clear()
         if self.prova:
             arquivo = self.pasta_atual / "resultados.csv"
             if arquivo.exists():
                 arquivo.unlink()
 
-    @property
-    def pasta_atual(self) -> Path:
+    @property                                                                                                                  #permite acessar metodo como atributo
+    def pasta_atual(self) -> Path:                                                                                            #retorna pasta da prova atual
         if not self.prova:
             raise ValueError("Selecione ou cadastre uma prova primeiro.")
         return self.pasta_provas / self.prova.identificador
 
     # ---------- Provas ----------
 
-    def listar_provas(self) -> list[Prova]:
+    def listar_provas(self) -> list[Prova]:                                                                                     #lista provas cadastradas
         provas = []
         for numero, campos in enumerate(
             self._ler_csv(self.arquivo_provas, "provas", 4), start=2
@@ -113,7 +115,7 @@ class CorretorProvas:
             provas.append(Prova(*campos))
         return provas
 
-    def criar_prova(self, identificador: str, nome: str, disciplina: str, categoria: str) -> None:
+    def criar_prova(self, identificador: str, nome: str, disciplina: str, categoria: str) -> None:                                           #cria e salva nova prova
         identificador = identificador.strip().upper()
         self._validar_identificador(identificador, "da olimpíada/prova")
         self._validar_campos_texto(nome=nome, disciplina=disciplina, categoria=categoria)
@@ -138,7 +140,7 @@ class CorretorProvas:
             )
         self.selecionar_prova(identificador)
 
-    def selecionar_prova(self, identificador: str) -> None:
+    def selecionar_prova(self, identificador: str) -> None:                                                                    #seleciona prova ativa
         identificador = identificador.strip().upper()
         prova = next((p for p in self.listar_provas() if p.identificador == identificador), None)
         if not prova:
@@ -168,7 +170,7 @@ class CorretorProvas:
 
     # ---------- Participantes ----------
 
-    def importar_participantes(self, caminho: Path, salvar: bool = True) -> None:
+    def importar_participantes(self, caminho: Path, salvar: bool = True) -> None:                                                     #le e valida partcicipantes
         novos: dict[str, Participante] = {}
         for numero, (identificador, nome, categoria) in enumerate(
             self._ler_csv(caminho, "participantes", 3), start=2
@@ -186,7 +188,7 @@ class CorretorProvas:
         if salvar:
             self.salvar_participantes()
 
-    def cadastrar_participante(self, identificador: str, nome: str, categoria: str) -> None:
+    def cadastrar_participante(self, identificador: str, nome: str, categoria: str) -> None:                                           
         identificador = identificador.strip().upper()
         self._validar_identificador(identificador, "do participante")
         self._validar_campos_texto(nome=nome, categoria=categoria)
@@ -197,7 +199,7 @@ class CorretorProvas:
         )
         self.salvar_participantes()
 
-    def salvar_participantes(self) -> None:
+    def salvar_participantes(self) -> None:                                                                                        
         self._invalidar_resultados()
         linhas = (
             (p.identificador, p.nome, p.categoria) for p in self.participantes.values()

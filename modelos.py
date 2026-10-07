@@ -1,4 +1,5 @@
-from dataclasses import dataclass, field
+#estruturas de dados com dataclass.
+from dataclasses import dataclass, field                                                                   #armazena dados
 
 
 @dataclass

@@ -1,9 +1,10 @@
-from math import isfinite
-from pathlib import Path
-from statistics import mean
+#interface de terminal, menus e entradas do usuário
+from math import isfinite                                                                        #verifica núm finito 
+from pathlib import Path                                                                         #caminhos de arquivos e pastas
+from statistics import mean                                                                      #calcula media aritmetica 
 
-from modelos import Questao
-from sistema import CorretorProvas
+from modelos import Questao 
+from sistema import CorretorProvas 
 
 
 PASTA_PROJETO = Path(__file__).resolve().parent
@@ -11,21 +12,24 @@ PASTA_DADOS = PASTA_PROJETO / "dados"
 DISCIPLINA_PADRAO = "Matemática"
 
 
-def ler_inteiro(mensagem: str, minimo: int = 1) -> int:
-    while True:
+def ler_inteiro(mensagem: str, minimo: int = 1) -> int: #le e valida núm inteiros
+    while True: #repete ate receber um valor valido
         try:
             valor = int(input(mensagem).strip())
-            if valor >= minimo:
+            if valor >= minimo: #so aceita valor maior ou igual ao mín definido
                 return valor
         except ValueError:
-            pass
+            pass #ocorre quando o usuario digita algo que não é inteiro
         print(f"Digite um número inteiro maior ou igual a {minimo}.")
 
-
+#lê e valida núm decimal positivos
 def ler_float(mensagem: str) -> float:
     while True:
         try:
+            #aceita tsnto virgula como ponto quanto separador decimal
             valor = float(input(mensagem).strip().replace(",", "."))
+
+            #impede zero, negativo, infinito e NaN
             if isfinite(valor) and valor > 0:
                 return valor
         except ValueError:
@@ -33,44 +37,44 @@ def ler_float(mensagem: str) -> float:
         print("Digite um número maior que zero.")
 
 
-def ler_sim_nao(mensagem: str) -> bool:
+def ler_sim_nao(mensagem: str) -> bool: #le respostas do tipo sim/nao e transforma em true/false
     while True:
-        resposta = input(mensagem).strip().upper()
-        if resposta in {"S", "SIM"}:
+        resposta = input(mensagem).strip().upper() #remove espaços e transforma a resposta em maiúscula
+        if resposta in {"S", "SIM"}: 
             return True
         if resposta in {"N", "NAO", "NÃO"}:
             return False
         print("Digite S para sim ou N para não.")
 
 
-def ler_caminho(mensagem: str) -> Path:
+def ler_caminho(mensagem: str) -> Path: #le e valida caminho
     caminho = Path(input(mensagem).strip().strip('"').strip("'")).expanduser()
 
     if not caminho.is_absolute():
         opcoes = [Path.cwd() / caminho, PASTA_PROJETO / caminho]
         caminho = next((p for p in opcoes if p.is_file()), opcoes[0])
 
-    if not caminho.is_file():
+    if not caminho.is_file(): #confere se caminho existe
         raise ValueError(f"Arquivo não encontrado: {caminho}")
 
     return caminho.resolve()
 
 
-def escolher(titulo: str, opcoes: list[tuple[str, str]]) -> str:
+def escolher(titulo: str, opcoes: list[tuple[str, str]]) -> str: #função reutilizavel para montar os menus
     print(f"\n--- {titulo} ---")
     for codigo, texto in opcoes:
         print(f"{codigo}. {texto}")
     return input("Escolha: ").strip()
 
 
-def exigir_prova(corretor: CorretorProvas) -> bool:
+def exigir_prova(corretor: CorretorProvas) -> bool: #garante q a prova foi selecionada
     if corretor.prova:
         return True
     print("Selecione ou cadastre uma olimpíada/prova na opção 1 antes de continuar.")
     return False
 
 
-def ler_questao(numero: int) -> Questao:
+def ler_questao(numero: int) -> Questao: #le dados da questao, so segue se tiver td ok
     print(f"\nQuestão {numero}")
     while True:
         respostas = [r.strip().upper() for r in input("Resposta(s), ex.: A ou A|B: ").split("|")]
@@ -89,7 +93,7 @@ def ler_questao(numero: int) -> Questao:
 # ---------- Provas e gabarito ----------
 
 
-def listar_provas(corretor: CorretorProvas) -> None:
+def listar_provas(corretor: CorretorProvas) -> None: #exibi provas ja cadastrsdas
     provas = corretor.listar_provas()
     if not provas:
         print("Nenhuma prova cadastrada.")
@@ -101,7 +105,7 @@ def listar_provas(corretor: CorretorProvas) -> None:
         print(f"{marca}{prova.identificador:<8} | {prova.nome:<24} | {prova.disciplina:<19} | {prova.categoria}")
 
 
-def cadastrar_prova(corretor: CorretorProvas) -> None:
+def cadastrar_prova(corretor: CorretorProvas) -> None: #cria nova prova e salva no sistema
     corretor.criar_prova(
         input("ID da olimpíada/prova: "),
         input("Nome da olimpíada/prova: "),
@@ -111,14 +115,14 @@ def cadastrar_prova(corretor: CorretorProvas) -> None:
     print("Olimpíada/prova cadastrada e selecionada.")
 
 
-def selecionar_prova(corretor: CorretorProvas) -> None:
+def selecionar_prova(corretor: CorretorProvas) -> None: #define prova q será usada
     listar_provas(corretor)
     if corretor.listar_provas():
         corretor.selecionar_prova(input("Informe o ID: "))
         print("Prova selecionada. Os dados salvos foram carregados.")
 
 
-def exibir_gabarito(corretor: CorretorProvas) -> None:
+def exibir_gabarito(corretor: CorretorProvas) -> None: 
     if not exigir_prova(corretor):
         return
     if not corretor.prova.questoes:
