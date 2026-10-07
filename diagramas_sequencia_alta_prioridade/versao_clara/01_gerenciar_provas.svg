@@ -1,0 +1,163 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2880" height="2325" viewBox="0 0 2880 2325">
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="55" y="68" font-family="Arial, sans-serif" font-size="38" font-weight="bold" text-anchor="start" fill="#172b42">RF02</text>
+<line x1="55" y1="88" x2="2825" y2="88" stroke="#c5d0dc" stroke-width="2"/>
+<circle cx="240" cy="115" r="12" fill="none" stroke="#172b42" stroke-width="2"/>
+<line x1="240" y1="127" x2="240" y2="159" stroke="#172b42" stroke-width="2"/>
+<line x1="215" y1="137" x2="265" y2="137" stroke="#172b42" stroke-width="2"/>
+<line x1="240" y1="159" x2="216" y2="185" stroke="#172b42" stroke-width="2"/>
+<line x1="240" y1="159" x2="264" y2="185" stroke="#172b42" stroke-width="2"/>
+<text x="240" y="212" font-family="Arial, sans-serif" font-size="21" font-weight="bold" text-anchor="middle" fill="#172b42">Administrador</text>
+<line x1="240" y1="220" x2="240" y2="2290" stroke="#596b7d" stroke-width="2" stroke-dasharray="7 6"/>
+<rect x="515" y="123" width="410" height="79" rx="0" fill="#ffffff" stroke="#263e56" stroke-width="2"/>
+<text x="720" y="151" font-family="Arial, sans-serif" font-size="18" font-weight="normal" text-anchor="middle" fill="#596b7d">«boundary»</text>
+<text x="720" y="185" font-family="Arial, sans-serif" font-size="22" font-weight="bold" text-anchor="middle" fill="#172b42">:TelaProva</text>
+<line x1="664.5078125" y1="191" x2="775.4921875" y2="191" stroke="#172b42" stroke-width="1"/>
+<line x1="720" y1="202" x2="720" y2="2290" stroke="#596b7d" stroke-width="2" stroke-dasharray="7 6"/>
+<rect x="995" y="123" width="410" height="79" rx="0" fill="#ffffff" stroke="#263e56" stroke-width="2"/>
+<text x="1200" y="151" font-family="Arial, sans-serif" font-size="18" font-weight="normal" text-anchor="middle" fill="#596b7d">«control»</text>
+<text x="1200" y="185" font-family="Arial, sans-serif" font-size="22" font-weight="bold" text-anchor="middle" fill="#172b42">:ControladorProva</text>
+<line x1="1104.0" y1="191" x2="1296.0" y2="191" stroke="#172b42" stroke-width="1"/>
+<line x1="1200" y1="202" x2="1200" y2="2290" stroke="#596b7d" stroke-width="2" stroke-dasharray="7 6"/>
+<rect x="1475" y="123" width="410" height="79" rx="0" fill="#ffffff" stroke="#263e56" stroke-width="2"/>
+<text x="1680" y="151" font-family="Arial, sans-serif" font-size="18" font-weight="normal" text-anchor="middle" fill="#596b7d">«entity»</text>
+<text x="1680" y="185" font-family="Arial, sans-serif" font-size="22" font-weight="bold" text-anchor="middle" fill="#172b42">:RepositorioProva</text>
+<line x1="1586.0" y1="191" x2="1774.0" y2="191" stroke="#172b42" stroke-width="1"/>
+<line x1="1680" y1="202" x2="1680" y2="2290" stroke="#596b7d" stroke-width="2" stroke-dasharray="7 6"/>
+<rect x="1955" y="123" width="410" height="79" rx="0" fill="#ffffff" stroke="#263e56" stroke-width="2"/>
+<text x="2160" y="151" font-family="Arial, sans-serif" font-size="18" font-weight="normal" text-anchor="middle" fill="#596b7d">«entity»</text>
+<text x="2160" y="185" font-family="Arial, sans-serif" font-size="22" font-weight="bold" text-anchor="middle" fill="#172b42">prova:Prova</text>
+<line x1="2096.5" y1="191" x2="2223.5" y2="191" stroke="#172b42" stroke-width="1"/>
+<line x1="2160" y1="202" x2="2160" y2="2290" stroke="#596b7d" stroke-width="2" stroke-dasharray="7 6"/>
+<rect x="2435" y="123" width="410" height="79" rx="0" fill="#ffffff" stroke="#263e56" stroke-width="2"/>
+<text x="2640" y="151" font-family="Arial, sans-serif" font-size="18" font-weight="normal" text-anchor="middle" fill="#596b7d">«entity»</text>
+<text x="2640" y="185" font-family="Arial, sans-serif" font-size="22" font-weight="bold" text-anchor="middle" fill="#172b42">criterios:CriteriosPontuacao</text>
+<line x1="2493.5" y1="191" x2="2786.5" y2="191" stroke="#172b42" stroke-width="1"/>
+<line x1="2640" y1="202" x2="2640" y2="2290" stroke="#596b7d" stroke-width="2" stroke-dasharray="7 6"/>
+<rect x="1670" y="462" width="20" height="84" rx="0" fill="#74b6e6" stroke="#74b6e6" stroke-width="2"/>
+<rect x="2150" y="678" width="20" height="84" rx="0" fill="#74b6e6" stroke="#74b6e6" stroke-width="2"/>
+<rect x="2150" y="894" width="20" height="84" rx="0" fill="#74b6e6" stroke="#74b6e6" stroke-width="2"/>
+<rect x="2630" y="1082" width="20" height="84" rx="0" fill="#74b6e6" stroke="#74b6e6" stroke-width="2"/>
+<rect x="2150" y="1242" width="20" height="84" rx="0" fill="#74b6e6" stroke="#74b6e6" stroke-width="2"/>
+<rect x="2630" y="1458" width="20" height="84" rx="0" fill="#74b6e6" stroke="#74b6e6" stroke-width="2"/>
+<rect x="2150" y="1618" width="20" height="84" rx="0" fill="#74b6e6" stroke="#74b6e6" stroke-width="2"/>
+<rect x="1670" y="1778" width="20" height="84" rx="0" fill="#74b6e6" stroke="#74b6e6" stroke-width="2"/>
+<rect x="1190" y="378" width="20" height="1804" rx="0" fill="#74b6e6" stroke="#74b6e6" stroke-width="2"/>
+<rect x="710" y="294" width="20" height="1964" rx="0" fill="#74b6e6" stroke="#74b6e6" stroke-width="2"/>
+<rect x="1202" y="1980" width="20" height="109" rx="0" fill="#74b6e6" stroke="#74b6e6" stroke-width="2"/>
+<text x="480.0" y="263" font-family="Arial, sans-serif" font-size="21" font-weight="normal" text-anchor="middle" fill="#172b42">1. confirmarConfiguracao(dados)</text>
+<line x1="240" y1="294" x2="720" y2="294" stroke="#263e56" stroke-width="2"/>
+<line x1="707" y1="287" x2="720" y2="294" stroke="#263e56" stroke-width="2"/>
+<line x1="707" y1="301" x2="720" y2="294" stroke="#263e56" stroke-width="2"/>
+<polygon points="720,294 707,287 707,301" fill="#263e56"/>
+<text x="960.0" y="347" font-family="Arial, sans-serif" font-size="21" font-weight="normal" text-anchor="middle" fill="#172b42">2. salvarConfiguracao(dados)</text>
+<line x1="720" y1="378" x2="1200" y2="378" stroke="#263e56" stroke-width="2"/>
+<line x1="1187" y1="371" x2="1200" y2="378" stroke="#263e56" stroke-width="2"/>
+<line x1="1187" y1="385" x2="1200" y2="378" stroke="#263e56" stroke-width="2"/>
+<polygon points="1200,378 1187,371 1187,385" fill="#263e56"/>
+<text x="1440.0" y="431" font-family="Arial, sans-serif" font-size="21" font-weight="normal" text-anchor="middle" fill="#172b42">3. buscarPorId(dados.provaId)</text>
+<line x1="1200" y1="462" x2="1680" y2="462" stroke="#263e56" stroke-width="2"/>
+<line x1="1667" y1="455" x2="1680" y2="462" stroke="#263e56" stroke-width="2"/>
+<line x1="1667" y1="469" x2="1680" y2="462" stroke="#263e56" stroke-width="2"/>
+<polygon points="1680,462 1667,455 1667,469" fill="#263e56"/>
+<text x="1440.0" y="515" font-family="Arial, sans-serif" font-size="21" font-weight="normal" text-anchor="middle" fill="#172b42">4. prova ou nulo</text>
+<line x1="1680" y1="546" x2="1200" y2="546" stroke="#263e56" stroke-width="2" stroke-dasharray="7 6"/>
+<line x1="1213" y1="539" x2="1200" y2="546" stroke="#263e56" stroke-width="2"/>
+<line x1="1213" y1="553" x2="1200" y2="546" stroke="#263e56" stroke-width="2"/>
+<rect x="58" y="573" width="170" height="36" rx="7" fill="#d9eafe" stroke="#d9eafe" stroke-width="2"/>
+<text x="143" y="598" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="#172b42">alt</text>
+<text x="248" y="599" font-family="Arial, sans-serif" font-size="21" font-weight="bold" text-anchor="start" fill="#172b42">[prova == nulo]</text>
+<text x="1680.0" y="647" font-family="Arial, sans-serif" font-size="21" font-weight="normal" text-anchor="middle" fill="#172b42">5. inicializar(id, olimpiadaId, categoriaId)</text>
+<line x1="1200" y1="678" x2="2160" y2="678" stroke="#263e56" stroke-width="2"/>
+<line x1="2147" y1="671" x2="2160" y2="678" stroke="#263e56" stroke-width="2"/>
+<line x1="2147" y1="685" x2="2160" y2="678" stroke="#263e56" stroke-width="2"/>
+<polygon points="2160,678 2147,671 2147,685" fill="#263e56"/>
+<text x="1680.0" y="731" font-family="Arial, sans-serif" font-size="21" font-weight="normal" text-anchor="middle" fill="#172b42">6. prova, vinculoValido</text>
+<line x1="2160" y1="762" x2="1200" y2="762" stroke="#263e56" stroke-width="2" stroke-dasharray="7 6"/>
+<line x1="1213" y1="755" x2="1200" y2="762" stroke="#263e56" stroke-width="2"/>
+<line x1="1213" y1="769" x2="1200" y2="762" stroke="#263e56" stroke-width="2"/>
+<line x1="48" y1="784" x2="2832" y2="784" stroke="#172b42" stroke-width="2" stroke-dasharray="7 6"/>
+<text x="248" y="814" font-family="Arial, sans-serif" font-size="21" font-weight="bold" text-anchor="start" fill="#172b42">[prova != nulo]</text>
+<text x="1680.0" y="863" font-family="Arial, sans-serif" font-size="21" font-weight="normal" text-anchor="middle" fill="#172b42">7. verificarVinculo(olimpiadaId, categoriaId)</text>
+<line x1="1200" y1="894" x2="2160" y2="894" stroke="#263e56" stroke-width="2"/>
+<line x1="2147" y1="887" x2="2160" y2="894" stroke="#263e56" stroke-width="2"/>
+<line x1="2147" y1="901" x2="2160" y2="894" stroke="#263e56" stroke-width="2"/>
+<polygon points="2160,894 2147,887 2147,901" fill="#263e56"/>
+<text x="1680.0" y="947" font-family="Arial, sans-serif" font-size="21" font-weight="normal" text-anchor="middle" fill="#172b42">8. vinculoValido</text>
+<line x1="2160" y1="978" x2="1200" y2="978" stroke="#263e56" stroke-width="2" stroke-dasharray="7 6"/>
+<line x1="1213" y1="971" x2="1200" y2="978" stroke="#263e56" stroke-width="2"/>
+<line x1="1213" y1="985" x2="1200" y2="978" stroke="#263e56" stroke-width="2"/>
+<rect x="48" y="568" width="2784" height="442" rx="22" fill="none" stroke="#172b42" stroke-width="2"/>
+<text x="1920.0" y="1051" font-family="Arial, sans-serif" font-size="21" font-weight="normal" text-anchor="middle" fill="#172b42">9. validar(dados.regras)</text>
+<line x1="1200" y1="1082" x2="2640" y2="1082" stroke="#263e56" stroke-width="2"/>
+<line x1="2627" y1="1075" x2="2640" y2="1082" stroke="#263e56" stroke-width="2"/>
+<line x1="2627" y1="1089" x2="2640" y2="1082" stroke="#263e56" stroke-width="2"/>
+<polygon points="2640,1082 2627,1075 2627,1089" fill="#263e56"/>
+<text x="1920.0" y="1135" font-family="Arial, sans-serif" font-size="21" font-weight="normal" text-anchor="middle" fill="#172b42">10. errosRegras</text>
+<line x1="2640" y1="1166" x2="1200" y2="1166" stroke="#263e56" stroke-width="2" stroke-dasharray="7 6"/>
+<line x1="1213" y1="1159" x2="1200" y2="1166" stroke="#263e56" stroke-width="2"/>
+<line x1="1213" y1="1173" x2="1200" y2="1166" stroke="#263e56" stroke-width="2"/>
+<text x="1680.0" y="1211" font-family="Arial, sans-serif" font-size="21" font-weight="normal" text-anchor="middle" fill="#172b42">11. validarConfiguracao(dados)</text>
+<line x1="1200" y1="1242" x2="2160" y2="1242" stroke="#263e56" stroke-width="2"/>
+<line x1="2147" y1="1235" x2="2160" y2="1242" stroke="#263e56" stroke-width="2"/>
+<line x1="2147" y1="1249" x2="2160" y2="1242" stroke="#263e56" stroke-width="2"/>
+<polygon points="2160,1242 2147,1235 2147,1249" fill="#263e56"/>
+<text x="1680.0" y="1295" font-family="Arial, sans-serif" font-size="21" font-weight="normal" text-anchor="middle" fill="#172b42">12. errosProva</text>
+<line x1="2160" y1="1326" x2="1200" y2="1326" stroke="#263e56" stroke-width="2" stroke-dasharray="7 6"/>
+<line x1="1213" y1="1319" x2="1200" y2="1326" stroke="#263e56" stroke-width="2"/>
+<line x1="1213" y1="1333" x2="1200" y2="1326" stroke="#263e56" stroke-width="2"/>
+<rect x="58" y="1353" width="170" height="36" rx="7" fill="#d9eafe" stroke="#d9eafe" stroke-width="2"/>
+<text x="143" y="1378" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="#172b42">alt</text>
+<text x="248" y="1379" font-family="Arial, sans-serif" font-size="21" font-weight="bold" text-anchor="start" fill="#172b42">[erros vazios e vinculo valido]</text>
+<text x="1920.0" y="1427" font-family="Arial, sans-serif" font-size="21" font-weight="normal" text-anchor="middle" fill="#172b42">13. configurar(dados.regras)</text>
+<line x1="1200" y1="1458" x2="2640" y2="1458" stroke="#263e56" stroke-width="2"/>
+<line x1="2627" y1="1451" x2="2640" y2="1458" stroke="#263e56" stroke-width="2"/>
+<line x1="2627" y1="1465" x2="2640" y2="1458" stroke="#263e56" stroke-width="2"/>
+<polygon points="2640,1458 2627,1451 2627,1465" fill="#263e56"/>
+<text x="1920.0" y="1511" font-family="Arial, sans-serif" font-size="21" font-weight="normal" text-anchor="middle" fill="#172b42">14. criterios</text>
+<line x1="2640" y1="1542" x2="1200" y2="1542" stroke="#263e56" stroke-width="2" stroke-dasharray="7 6"/>
+<line x1="1213" y1="1535" x2="1200" y2="1542" stroke="#263e56" stroke-width="2"/>
+<line x1="1213" y1="1549" x2="1200" y2="1542" stroke="#263e56" stroke-width="2"/>
+<text x="1680.0" y="1587" font-family="Arial, sans-serif" font-size="21" font-weight="normal" text-anchor="middle" fill="#172b42">15. configurar(dados, criterios)</text>
+<line x1="1200" y1="1618" x2="2160" y2="1618" stroke="#263e56" stroke-width="2"/>
+<line x1="2147" y1="1611" x2="2160" y2="1618" stroke="#263e56" stroke-width="2"/>
+<line x1="2147" y1="1625" x2="2160" y2="1618" stroke="#263e56" stroke-width="2"/>
+<polygon points="2160,1618 2147,1611 2147,1625" fill="#263e56"/>
+<text x="1680.0" y="1671" font-family="Arial, sans-serif" font-size="21" font-weight="normal" text-anchor="middle" fill="#172b42">16. provaAtualizada</text>
+<line x1="2160" y1="1702" x2="1200" y2="1702" stroke="#263e56" stroke-width="2" stroke-dasharray="7 6"/>
+<line x1="1213" y1="1695" x2="1200" y2="1702" stroke="#263e56" stroke-width="2"/>
+<line x1="1213" y1="1709" x2="1200" y2="1702" stroke="#263e56" stroke-width="2"/>
+<text x="1440.0" y="1747" font-family="Arial, sans-serif" font-size="21" font-weight="normal" text-anchor="middle" fill="#172b42">17. salvar(provaAtualizada)</text>
+<line x1="1200" y1="1778" x2="1680" y2="1778" stroke="#263e56" stroke-width="2"/>
+<line x1="1667" y1="1771" x2="1680" y2="1778" stroke="#263e56" stroke-width="2"/>
+<line x1="1667" y1="1785" x2="1680" y2="1778" stroke="#263e56" stroke-width="2"/>
+<polygon points="1680,1778 1667,1771 1667,1785" fill="#263e56"/>
+<text x="1440.0" y="1831" font-family="Arial, sans-serif" font-size="21" font-weight="normal" text-anchor="middle" fill="#172b42">18. idProva</text>
+<line x1="1680" y1="1862" x2="1200" y2="1862" stroke="#263e56" stroke-width="2" stroke-dasharray="7 6"/>
+<line x1="1213" y1="1855" x2="1200" y2="1862" stroke="#263e56" stroke-width="2"/>
+<line x1="1213" y1="1869" x2="1200" y2="1862" stroke="#263e56" stroke-width="2"/>
+<line x1="48" y1="1884" x2="2832" y2="1884" stroke="#172b42" stroke-width="2" stroke-dasharray="7 6"/>
+<text x="248" y="1914" font-family="Arial, sans-serif" font-size="21" font-weight="bold" text-anchor="start" fill="#172b42">[configuracao invalida]</text>
+<line x1="1200" y1="1980" x2="1265" y2="1980" stroke="#263e56" stroke-width="2"/>
+<line x1="1265" y1="1980" x2="1265" y2="2005" stroke="#263e56" stroke-width="2"/>
+<line x1="1265" y1="2005" x2="1200" y2="2005" stroke="#263e56" stroke-width="2"/>
+<line x1="1213" y1="1998" x2="1200" y2="2005" stroke="#263e56" stroke-width="2"/>
+<line x1="1213" y1="2012" x2="1200" y2="2005" stroke="#263e56" stroke-width="2"/>
+<polygon points="1200,2005 1213,1998 1213,2012" fill="#263e56"/>
+<text x="1230" y="1968" font-family="Arial, sans-serif" font-size="21" font-weight="normal" text-anchor="start" fill="#172b42">19. montarErros(errosRegras, errosProva, vinculoValido)</text>
+<line x1="1200" y1="2064" x2="1265" y2="2064" stroke="#263e56" stroke-width="2" stroke-dasharray="7 6"/>
+<line x1="1265" y1="2064" x2="1265" y2="2089" stroke="#263e56" stroke-width="2" stroke-dasharray="7 6"/>
+<line x1="1265" y1="2089" x2="1200" y2="2089" stroke="#263e56" stroke-width="2" stroke-dasharray="7 6"/>
+<line x1="1213" y1="2082" x2="1200" y2="2089" stroke="#263e56" stroke-width="2"/>
+<line x1="1213" y1="2096" x2="1200" y2="2089" stroke="#263e56" stroke-width="2"/>
+<text x="1230" y="2052" font-family="Arial, sans-serif" font-size="21" font-weight="normal" text-anchor="start" fill="#172b42">20. retornoErro</text>
+<rect x="48" y="1348" width="2784" height="762" rx="22" fill="none" stroke="#172b42" stroke-width="2"/>
+<text x="960.0" y="2151" font-family="Arial, sans-serif" font-size="21" font-weight="normal" text-anchor="middle" fill="#172b42">21. retorno</text>
+<line x1="1200" y1="2182" x2="720" y2="2182" stroke="#263e56" stroke-width="2" stroke-dasharray="7 6"/>
+<line x1="733" y1="2175" x2="720" y2="2182" stroke="#263e56" stroke-width="2"/>
+<line x1="733" y1="2189" x2="720" y2="2182" stroke="#263e56" stroke-width="2"/>
+<text x="480.0" y="2227" font-family="Arial, sans-serif" font-size="21" font-weight="normal" text-anchor="middle" fill="#172b42">22. exibirRetorno(retorno)</text>
+<line x1="720" y1="2258" x2="240" y2="2258" stroke="#263e56" stroke-width="2" stroke-dasharray="7 6"/>
+<line x1="253" y1="2251" x2="240" y2="2258" stroke="#263e56" stroke-width="2"/>
+<line x1="253" y1="2265" x2="240" y2="2258" stroke="#263e56" stroke-width="2"/>
+</svg>

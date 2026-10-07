@@ -1,0 +1,163 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="3840" height="2249" viewBox="0 0 3840 2249">
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="55" y="68" font-family="Arial, sans-serif" font-size="38" font-weight="bold" text-anchor="start" fill="#172b42">RF05</text>
+<line x1="55" y1="88" x2="3785" y2="88" stroke="#c5d0dc" stroke-width="2"/>
+<circle cx="240" cy="115" r="12" fill="none" stroke="#172b42" stroke-width="2"/>
+<line x1="240" y1="127" x2="240" y2="159" stroke="#172b42" stroke-width="2"/>
+<line x1="215" y1="137" x2="265" y2="137" stroke="#172b42" stroke-width="2"/>
+<line x1="240" y1="159" x2="216" y2="185" stroke="#172b42" stroke-width="2"/>
+<line x1="240" y1="159" x2="264" y2="185" stroke="#172b42" stroke-width="2"/>
+<text x="240" y="212" font-family="Arial, sans-serif" font-size="21" font-weight="bold" text-anchor="middle" fill="#172b42">Administrador</text>
+<line x1="240" y1="220" x2="240" y2="2214" stroke="#596b7d" stroke-width="2" stroke-dasharray="7 6"/>
+<rect x="515" y="123" width="410" height="79" rx="0" fill="#ffffff" stroke="#263e56" stroke-width="2"/>
+<text x="720" y="151" font-family="Arial, sans-serif" font-size="18" font-weight="normal" text-anchor="middle" fill="#596b7d">«boundary»</text>
+<text x="720" y="185" font-family="Arial, sans-serif" font-size="22" font-weight="bold" text-anchor="middle" fill="#172b42">:TelaImportacao</text>
+<line x1="636.5078125" y1="191" x2="803.4921875" y2="191" stroke="#172b42" stroke-width="1"/>
+<line x1="720" y1="202" x2="720" y2="2214" stroke="#596b7d" stroke-width="2" stroke-dasharray="7 6"/>
+<rect x="995" y="123" width="410" height="79" rx="0" fill="#ffffff" stroke="#263e56" stroke-width="2"/>
+<text x="1200" y="151" font-family="Arial, sans-serif" font-size="18" font-weight="normal" text-anchor="middle" fill="#596b7d">«control»</text>
+<text x="1200" y="185" font-family="Arial, sans-serif" font-size="22" font-weight="bold" text-anchor="middle" fill="#172b42">:ControladorImportacao</text>
+<line x1="1076.0" y1="191" x2="1324.0" y2="191" stroke="#172b42" stroke-width="1"/>
+<line x1="1200" y1="202" x2="1200" y2="2214" stroke="#596b7d" stroke-width="2" stroke-dasharray="7 6"/>
+<rect x="1475" y="123" width="410" height="79" rx="0" fill="#ffffff" stroke="#263e56" stroke-width="2"/>
+<text x="1680" y="151" font-family="Arial, sans-serif" font-size="18" font-weight="normal" text-anchor="middle" fill="#596b7d">«control»</text>
+<text x="1680" y="185" font-family="Arial, sans-serif" font-size="22" font-weight="bold" text-anchor="middle" fill="#172b42">:LeitorArquivo</text>
+<line x1="1605.5" y1="191" x2="1754.5" y2="191" stroke="#172b42" stroke-width="1"/>
+<line x1="1680" y1="202" x2="1680" y2="2214" stroke="#596b7d" stroke-width="2" stroke-dasharray="7 6"/>
+<rect x="1955" y="123" width="410" height="79" rx="0" fill="#ffffff" stroke="#263e56" stroke-width="2"/>
+<text x="2160" y="151" font-family="Arial, sans-serif" font-size="18" font-weight="normal" text-anchor="middle" fill="#596b7d">«control»</text>
+<text x="2160" y="185" font-family="Arial, sans-serif" font-size="22" font-weight="bold" text-anchor="middle" fill="#172b42">:ValidadorRespostas</text>
+<line x1="2052.5078125" y1="191" x2="2267.4921875" y2="191" stroke="#172b42" stroke-width="1"/>
+<line x1="2160" y1="202" x2="2160" y2="2214" stroke="#596b7d" stroke-width="2" stroke-dasharray="7 6"/>
+<rect x="2435" y="123" width="410" height="79" rx="0" fill="#ffffff" stroke="#263e56" stroke-width="2"/>
+<text x="2640" y="151" font-family="Arial, sans-serif" font-size="18" font-weight="normal" text-anchor="middle" fill="#596b7d">«entity»</text>
+<text x="2640" y="185" font-family="Arial, sans-serif" font-size="22" font-weight="bold" text-anchor="middle" fill="#172b42">:RepositorioProva</text>
+<line x1="2546.0" y1="191" x2="2734.0" y2="191" stroke="#172b42" stroke-width="1"/>
+<line x1="2640" y1="202" x2="2640" y2="2214" stroke="#596b7d" stroke-width="2" stroke-dasharray="7 6"/>
+<rect x="2915" y="123" width="410" height="79" rx="0" fill="#ffffff" stroke="#263e56" stroke-width="2"/>
+<text x="3120" y="151" font-family="Arial, sans-serif" font-size="18" font-weight="normal" text-anchor="middle" fill="#596b7d">«entity»</text>
+<text x="3120" y="185" font-family="Arial, sans-serif" font-size="22" font-weight="bold" text-anchor="middle" fill="#172b42">:RepositorioRespostas</text>
+<line x1="3002.0" y1="191" x2="3238.0" y2="191" stroke="#172b42" stroke-width="1"/>
+<line x1="3120" y1="202" x2="3120" y2="2214" stroke="#596b7d" stroke-width="2" stroke-dasharray="7 6"/>
+<rect x="3395" y="123" width="410" height="79" rx="0" fill="#ffffff" stroke="#263e56" stroke-width="2"/>
+<text x="3600" y="151" font-family="Arial, sans-serif" font-size="18" font-weight="normal" text-anchor="middle" fill="#596b7d">«entity»</text>
+<text x="3600" y="185" font-family="Arial, sans-serif" font-size="22" font-weight="bold" text-anchor="middle" fill="#172b42">relatorio:RelatorioImportacao</text>
+<line x1="3447.5" y1="191" x2="3752.5" y2="191" stroke="#172b42" stroke-width="1"/>
+<line x1="3600" y1="202" x2="3600" y2="2214" stroke="#596b7d" stroke-width="2" stroke-dasharray="7 6"/>
+<rect x="1670" y="462" width="20" height="84" rx="0" fill="#74b6e6" stroke="#74b6e6" stroke-width="2"/>
+<rect x="2630" y="678" width="20" height="84" rx="0" fill="#74b6e6" stroke="#74b6e6" stroke-width="2"/>
+<rect x="2150" y="894" width="20" height="84" rx="0" fill="#74b6e6" stroke="#74b6e6" stroke-width="2"/>
+<rect x="3110" y="1110" width="20" height="84" rx="0" fill="#74b6e6" stroke="#74b6e6" stroke-width="2"/>
+<rect x="3590" y="1270" width="20" height="84" rx="0" fill="#74b6e6" stroke="#74b6e6" stroke-width="2"/>
+<rect x="3590" y="1486" width="20" height="84" rx="0" fill="#74b6e6" stroke="#74b6e6" stroke-width="2"/>
+<rect x="3590" y="1702" width="20" height="84" rx="0" fill="#74b6e6" stroke="#74b6e6" stroke-width="2"/>
+<rect x="3590" y="1918" width="20" height="84" rx="0" fill="#74b6e6" stroke="#74b6e6" stroke-width="2"/>
+<rect x="1190" y="378" width="20" height="1728" rx="0" fill="#74b6e6" stroke="#74b6e6" stroke-width="2"/>
+<rect x="710" y="294" width="20" height="1888" rx="0" fill="#74b6e6" stroke="#74b6e6" stroke-width="2"/>
+<text x="480.0" y="263" font-family="Arial, sans-serif" font-size="21" font-weight="normal" text-anchor="middle" fill="#172b42">1. confirmarImportacao(provaId, arquivo)</text>
+<line x1="240" y1="294" x2="720" y2="294" stroke="#263e56" stroke-width="2"/>
+<line x1="707" y1="287" x2="720" y2="294" stroke="#263e56" stroke-width="2"/>
+<line x1="707" y1="301" x2="720" y2="294" stroke="#263e56" stroke-width="2"/>
+<polygon points="720,294 707,287 707,301" fill="#263e56"/>
+<text x="960.0" y="347" font-family="Arial, sans-serif" font-size="21" font-weight="normal" text-anchor="middle" fill="#172b42">2. importar(provaId, arquivo)</text>
+<line x1="720" y1="378" x2="1200" y2="378" stroke="#263e56" stroke-width="2"/>
+<line x1="1187" y1="371" x2="1200" y2="378" stroke="#263e56" stroke-width="2"/>
+<line x1="1187" y1="385" x2="1200" y2="378" stroke="#263e56" stroke-width="2"/>
+<polygon points="1200,378 1187,371 1187,385" fill="#263e56"/>
+<text x="1440.0" y="431" font-family="Arial, sans-serif" font-size="21" font-weight="normal" text-anchor="middle" fill="#172b42">3. ler(arquivo)</text>
+<line x1="1200" y1="462" x2="1680" y2="462" stroke="#263e56" stroke-width="2"/>
+<line x1="1667" y1="455" x2="1680" y2="462" stroke="#263e56" stroke-width="2"/>
+<line x1="1667" y1="469" x2="1680" y2="462" stroke="#263e56" stroke-width="2"/>
+<polygon points="1680,462 1667,455 1667,469" fill="#263e56"/>
+<text x="1440.0" y="515" font-family="Arial, sans-serif" font-size="21" font-weight="normal" text-anchor="middle" fill="#172b42">4. registros ou erroFormato</text>
+<line x1="1680" y1="546" x2="1200" y2="546" stroke="#263e56" stroke-width="2" stroke-dasharray="7 6"/>
+<line x1="1213" y1="539" x2="1200" y2="546" stroke="#263e56" stroke-width="2"/>
+<line x1="1213" y1="553" x2="1200" y2="546" stroke="#263e56" stroke-width="2"/>
+<rect x="58" y="573" width="170" height="36" rx="7" fill="#d9eafe" stroke="#d9eafe" stroke-width="2"/>
+<text x="143" y="598" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="#172b42">alt</text>
+<text x="248" y="599" font-family="Arial, sans-serif" font-size="21" font-weight="bold" text-anchor="start" fill="#172b42">[arquivo valido]</text>
+<text x="1920.0" y="647" font-family="Arial, sans-serif" font-size="21" font-weight="normal" text-anchor="middle" fill="#172b42">5. buscarContexto(provaId)</text>
+<line x1="1200" y1="678" x2="2640" y2="678" stroke="#263e56" stroke-width="2"/>
+<line x1="2627" y1="671" x2="2640" y2="678" stroke="#263e56" stroke-width="2"/>
+<line x1="2627" y1="685" x2="2640" y2="678" stroke="#263e56" stroke-width="2"/>
+<polygon points="2640,678 2627,671 2627,685" fill="#263e56"/>
+<text x="1920.0" y="731" font-family="Arial, sans-serif" font-size="21" font-weight="normal" text-anchor="middle" fill="#172b42">6. prova, participantes, gabarito</text>
+<line x1="2640" y1="762" x2="1200" y2="762" stroke="#263e56" stroke-width="2" stroke-dasharray="7 6"/>
+<line x1="1213" y1="755" x2="1200" y2="762" stroke="#263e56" stroke-width="2"/>
+<line x1="1213" y1="769" x2="1200" y2="762" stroke="#263e56" stroke-width="2"/>
+<rect x="76" y="789" width="170" height="36" rx="7" fill="#d9eafe" stroke="#d9eafe" stroke-width="2"/>
+<text x="161" y="814" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="#172b42">loop</text>
+<text x="266" y="815" font-family="Arial, sans-serif" font-size="21" font-weight="bold" text-anchor="start" fill="#172b42">[para cada registro]</text>
+<text x="1680.0" y="863" font-family="Arial, sans-serif" font-size="21" font-weight="normal" text-anchor="middle" fill="#172b42">7. validar(registro, contexto)</text>
+<line x1="1200" y1="894" x2="2160" y2="894" stroke="#263e56" stroke-width="2"/>
+<line x1="2147" y1="887" x2="2160" y2="894" stroke="#263e56" stroke-width="2"/>
+<line x1="2147" y1="901" x2="2160" y2="894" stroke="#263e56" stroke-width="2"/>
+<polygon points="2160,894 2147,887 2147,901" fill="#263e56"/>
+<text x="1680.0" y="947" font-family="Arial, sans-serif" font-size="21" font-weight="normal" text-anchor="middle" fill="#172b42">8. validacao</text>
+<line x1="2160" y1="978" x2="1200" y2="978" stroke="#263e56" stroke-width="2" stroke-dasharray="7 6"/>
+<line x1="1213" y1="971" x2="1200" y2="978" stroke="#263e56" stroke-width="2"/>
+<line x1="1213" y1="985" x2="1200" y2="978" stroke="#263e56" stroke-width="2"/>
+<rect x="94" y="1005" width="170" height="36" rx="7" fill="#d9eafe" stroke="#d9eafe" stroke-width="2"/>
+<text x="179" y="1030" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="#172b42">alt</text>
+<text x="284" y="1031" font-family="Arial, sans-serif" font-size="21" font-weight="bold" text-anchor="start" fill="#172b42">[validacao permite registro]</text>
+<text x="2160.0" y="1079" font-family="Arial, sans-serif" font-size="21" font-weight="normal" text-anchor="middle" fill="#172b42">9. salvar(provaId, registro, validacao)</text>
+<line x1="1200" y1="1110" x2="3120" y2="1110" stroke="#263e56" stroke-width="2"/>
+<line x1="3107" y1="1103" x2="3120" y2="1110" stroke="#263e56" stroke-width="2"/>
+<line x1="3107" y1="1117" x2="3120" y2="1110" stroke="#263e56" stroke-width="2"/>
+<polygon points="3120,1110 3107,1103 3107,1117" fill="#263e56"/>
+<text x="2160.0" y="1163" font-family="Arial, sans-serif" font-size="21" font-weight="normal" text-anchor="middle" fill="#172b42">10. respostaId</text>
+<line x1="3120" y1="1194" x2="1200" y2="1194" stroke="#263e56" stroke-width="2" stroke-dasharray="7 6"/>
+<line x1="1213" y1="1187" x2="1200" y2="1194" stroke="#263e56" stroke-width="2"/>
+<line x1="1213" y1="1201" x2="1200" y2="1194" stroke="#263e56" stroke-width="2"/>
+<text x="2400.0" y="1239" font-family="Arial, sans-serif" font-size="21" font-weight="normal" text-anchor="middle" fill="#172b42">11. adicionarImportado(respostaId, validacao)</text>
+<line x1="1200" y1="1270" x2="3600" y2="1270" stroke="#263e56" stroke-width="2"/>
+<line x1="3587" y1="1263" x2="3600" y2="1270" stroke="#263e56" stroke-width="2"/>
+<line x1="3587" y1="1277" x2="3600" y2="1270" stroke="#263e56" stroke-width="2"/>
+<polygon points="3600,1270 3587,1263 3587,1277" fill="#263e56"/>
+<text x="2400.0" y="1323" font-family="Arial, sans-serif" font-size="21" font-weight="normal" text-anchor="middle" fill="#172b42">12. itemRegistrado</text>
+<line x1="3600" y1="1354" x2="1200" y2="1354" stroke="#263e56" stroke-width="2" stroke-dasharray="7 6"/>
+<line x1="1213" y1="1347" x2="1200" y2="1354" stroke="#263e56" stroke-width="2"/>
+<line x1="1213" y1="1361" x2="1200" y2="1354" stroke="#263e56" stroke-width="2"/>
+<line x1="84" y1="1376" x2="3756" y2="1376" stroke="#172b42" stroke-width="2" stroke-dasharray="7 6"/>
+<text x="284" y="1406" font-family="Arial, sans-serif" font-size="21" font-weight="bold" text-anchor="start" fill="#172b42">[inconsistencia impeditiva]</text>
+<text x="2400.0" y="1455" font-family="Arial, sans-serif" font-size="21" font-weight="normal" text-anchor="middle" fill="#172b42">13. adicionarFalha(registro.linha, validacao)</text>
+<line x1="1200" y1="1486" x2="3600" y2="1486" stroke="#263e56" stroke-width="2"/>
+<line x1="3587" y1="1479" x2="3600" y2="1486" stroke="#263e56" stroke-width="2"/>
+<line x1="3587" y1="1493" x2="3600" y2="1486" stroke="#263e56" stroke-width="2"/>
+<polygon points="3600,1486 3587,1479 3587,1493" fill="#263e56"/>
+<text x="2400.0" y="1539" font-family="Arial, sans-serif" font-size="21" font-weight="normal" text-anchor="middle" fill="#172b42">14. falhaRegistrada</text>
+<line x1="3600" y1="1570" x2="1200" y2="1570" stroke="#263e56" stroke-width="2" stroke-dasharray="7 6"/>
+<line x1="1213" y1="1563" x2="1200" y2="1570" stroke="#263e56" stroke-width="2"/>
+<line x1="1213" y1="1577" x2="1200" y2="1570" stroke="#263e56" stroke-width="2"/>
+<rect x="84" y="1000" width="3672" height="602" rx="22" fill="none" stroke="#172b42" stroke-width="2"/>
+<rect x="66" y="784" width="3708" height="846" rx="22" fill="none" stroke="#172b42" stroke-width="2"/>
+<text x="2400.0" y="1671" font-family="Arial, sans-serif" font-size="21" font-weight="normal" text-anchor="middle" fill="#172b42">15. resumir()</text>
+<line x1="1200" y1="1702" x2="3600" y2="1702" stroke="#263e56" stroke-width="2"/>
+<line x1="3587" y1="1695" x2="3600" y2="1702" stroke="#263e56" stroke-width="2"/>
+<line x1="3587" y1="1709" x2="3600" y2="1702" stroke="#263e56" stroke-width="2"/>
+<polygon points="3600,1702 3587,1695 3587,1709" fill="#263e56"/>
+<text x="2400.0" y="1755" font-family="Arial, sans-serif" font-size="21" font-weight="normal" text-anchor="middle" fill="#172b42">16. totais e ocorrencias</text>
+<line x1="3600" y1="1786" x2="1200" y2="1786" stroke="#263e56" stroke-width="2" stroke-dasharray="7 6"/>
+<line x1="1213" y1="1779" x2="1200" y2="1786" stroke="#263e56" stroke-width="2"/>
+<line x1="1213" y1="1793" x2="1200" y2="1786" stroke="#263e56" stroke-width="2"/>
+<line x1="48" y1="1808" x2="3792" y2="1808" stroke="#172b42" stroke-width="2" stroke-dasharray="7 6"/>
+<text x="248" y="1838" font-family="Arial, sans-serif" font-size="21" font-weight="bold" text-anchor="start" fill="#172b42">[arquivo invalido]</text>
+<text x="2400.0" y="1887" font-family="Arial, sans-serif" font-size="21" font-weight="normal" text-anchor="middle" fill="#172b42">17. adicionarFalhaArquivo(erroFormato)</text>
+<line x1="1200" y1="1918" x2="3600" y2="1918" stroke="#263e56" stroke-width="2"/>
+<line x1="3587" y1="1911" x2="3600" y2="1918" stroke="#263e56" stroke-width="2"/>
+<line x1="3587" y1="1925" x2="3600" y2="1918" stroke="#263e56" stroke-width="2"/>
+<polygon points="3600,1918 3587,1911 3587,1925" fill="#263e56"/>
+<text x="2400.0" y="1971" font-family="Arial, sans-serif" font-size="21" font-weight="normal" text-anchor="middle" fill="#172b42">18. relatorioErro</text>
+<line x1="3600" y1="2002" x2="1200" y2="2002" stroke="#263e56" stroke-width="2" stroke-dasharray="7 6"/>
+<line x1="1213" y1="1995" x2="1200" y2="2002" stroke="#263e56" stroke-width="2"/>
+<line x1="1213" y1="2009" x2="1200" y2="2002" stroke="#263e56" stroke-width="2"/>
+<rect x="48" y="568" width="3744" height="1466" rx="22" fill="none" stroke="#172b42" stroke-width="2"/>
+<text x="960.0" y="2075" font-family="Arial, sans-serif" font-size="21" font-weight="normal" text-anchor="middle" fill="#172b42">19. relatorio ou erro</text>
+<line x1="1200" y1="2106" x2="720" y2="2106" stroke="#263e56" stroke-width="2" stroke-dasharray="7 6"/>
+<line x1="733" y1="2099" x2="720" y2="2106" stroke="#263e56" stroke-width="2"/>
+<line x1="733" y1="2113" x2="720" y2="2106" stroke="#263e56" stroke-width="2"/>
+<text x="480.0" y="2151" font-family="Arial, sans-serif" font-size="21" font-weight="normal" text-anchor="middle" fill="#172b42">20. exibirResumo(relatorio)</text>
+<line x1="720" y1="2182" x2="240" y2="2182" stroke="#263e56" stroke-width="2" stroke-dasharray="7 6"/>
+<line x1="253" y1="2175" x2="240" y2="2182" stroke="#263e56" stroke-width="2"/>
+<line x1="253" y1="2189" x2="240" y2="2182" stroke="#263e56" stroke-width="2"/>
+</svg>

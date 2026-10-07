@@ -1,0 +1,84 @@
+@startuml
+title RF05
+autonumber
+hide footbox
+skinparam shadowing false
+skinparam sequenceMessageAlign center
+skinparam responseMessageBelowArrow false
+skinparam backgroundColor #111111
+skinparam defaultFontColor #EEEEEE
+skinparam sequence {
+ ArrowColor #EEEEEE
+ LifeLineBorderColor #BFBFBF
+ LifeLineBackgroundColor #168DBB
+ ParticipantBorderColor #EEEEEE
+ ParticipantBackgroundColor #111111
+ ParticipantFontColor #EEEEEE
+ ActorBorderColor #EEEEEE
+ ActorBackgroundColor #111111
+ ActorFontColor #EEEEEE
+ GroupBorderColor #EEEEEE
+ GroupBackgroundColor #111111
+ GroupFontColor #EEEEEE
+ GroupHeaderFontColor #EEEEEE
+}
+skinparam noteBackgroundColor #202020
+skinparam noteFontColor #EEEEEE
+skinparam noteBorderColor #BFBFBF
+actor "Administrador" as P0
+boundary ":TelaImportacao" as P1
+control ":ControladorImportacao" as P2
+control ":LeitorArquivo" as P3
+control ":ValidadorRespostas" as P4
+entity ":RepositorioProva" as P5
+entity ":RepositorioRespostas" as P6
+entity "relatorio:RelatorioImportacao" as P7
+P0 -> P1 : confirmarImportacao(provaId, arquivo)
+activate P1
+P1 -> P2 : importar(provaId, arquivo)
+activate P2
+P2 -> P3 : ler(arquivo)
+activate P3
+P3 --> P2 : registros ou erroFormato
+deactivate P3
+alt arquivo valido
+P2 -> P5 : buscarContexto(provaId)
+activate P5
+P5 --> P2 : prova, participantes, gabarito
+deactivate P5
+loop para cada registro
+P2 -> P4 : validar(registro, contexto)
+activate P4
+P4 --> P2 : validacao
+deactivate P4
+alt validacao permite registro
+P2 -> P6 : salvar(provaId, registro, validacao)
+activate P6
+P6 --> P2 : respostaId
+deactivate P6
+P2 -> P7 : adicionarImportado(respostaId, validacao)
+activate P7
+P7 --> P2 : itemRegistrado
+deactivate P7
+else inconsistencia impeditiva
+P2 -> P7 : adicionarFalha(registro.linha, validacao)
+activate P7
+P7 --> P2 : falhaRegistrada
+deactivate P7
+end
+end
+P2 -> P7 : resumir()
+activate P7
+P7 --> P2 : totais e ocorrencias
+deactivate P7
+else arquivo invalido
+P2 -> P7 : adicionarFalhaArquivo(erroFormato)
+activate P7
+P7 --> P2 : relatorioErro
+deactivate P7
+end
+P2 --> P1 : relatorio ou erro
+deactivate P2
+P1 --> P0 : exibirResumo(relatorio)
+deactivate P1
+@enduml

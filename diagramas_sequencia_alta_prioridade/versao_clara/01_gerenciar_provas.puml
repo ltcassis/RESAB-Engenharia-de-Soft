@@ -1,0 +1,84 @@
+@startuml
+title RF02
+autonumber
+hide footbox
+skinparam shadowing false
+skinparam sequenceMessageAlign center
+skinparam responseMessageBelowArrow false
+skinparam backgroundColor #ffffff
+skinparam defaultFontColor #172b42
+skinparam sequence {
+ ArrowColor #263e56
+ LifeLineBorderColor #596b7d
+ LifeLineBackgroundColor #74b6e6
+ ParticipantBorderColor #263e56
+ ParticipantBackgroundColor #ffffff
+ ParticipantFontColor #172b42
+ ActorBorderColor #172b42
+ ActorBackgroundColor #ffffff
+ ActorFontColor #172b42
+ GroupBorderColor #172b42
+ GroupBackgroundColor #ffffff
+ GroupFontColor #172b42
+ GroupHeaderFontColor #172b42
+}
+skinparam noteBackgroundColor #edf4fb
+skinparam noteFontColor #172b42
+skinparam noteBorderColor #596b7d
+actor "Administrador" as P0
+boundary ":TelaProva" as P1
+control ":ControladorProva" as P2
+entity ":RepositorioProva" as P3
+entity "prova:Prova" as P4
+entity "criterios:CriteriosPontuacao" as P5
+P0 -> P1 : confirmarConfiguracao(dados)
+activate P1
+P1 -> P2 : salvarConfiguracao(dados)
+activate P2
+P2 -> P3 : buscarPorId(dados.provaId)
+activate P3
+P3 --> P2 : prova ou nulo
+deactivate P3
+alt prova == nulo
+P2 -> P4 : inicializar(id, olimpiadaId, categoriaId)
+activate P4
+P4 --> P2 : prova, vinculoValido
+deactivate P4
+else prova != nulo
+P2 -> P4 : verificarVinculo(olimpiadaId, categoriaId)
+activate P4
+P4 --> P2 : vinculoValido
+deactivate P4
+end
+P2 -> P5 : validar(dados.regras)
+activate P5
+P5 --> P2 : errosRegras
+deactivate P5
+P2 -> P4 : validarConfiguracao(dados)
+activate P4
+P4 --> P2 : errosProva
+deactivate P4
+alt erros vazios e vinculo valido
+P2 -> P5 : configurar(dados.regras)
+activate P5
+P5 --> P2 : criterios
+deactivate P5
+P2 -> P4 : configurar(dados, criterios)
+activate P4
+P4 --> P2 : provaAtualizada
+deactivate P4
+P2 -> P3 : salvar(provaAtualizada)
+activate P3
+P3 --> P2 : idProva
+deactivate P3
+else configuracao invalida
+P2 -> P2 : montarErros(errosRegras, errosProva, vinculoValido)
+activate P2
+P2 --> P2 : retornoErro
+deactivate P2
+end
+P2 --> P1 : retorno
+deactivate P2
+P1 --> P0 : exibirRetorno(retorno)
+deactivate P1
+@enduml

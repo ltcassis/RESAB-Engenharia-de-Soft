@@ -1,0 +1,173 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="4320" height="2273" viewBox="0 0 4320 2273">
+<rect width="100%" height="100%" fill="#111111"/>
+<text x="55" y="68" font-family="Arial, sans-serif" font-size="38" font-weight="bold" text-anchor="start" fill="#eeeeee">RF07</text>
+<line x1="55" y1="88" x2="4265" y2="88" stroke="#555555" stroke-width="2"/>
+<circle cx="240" cy="115" r="12" fill="none" stroke="#eeeeee" stroke-width="2"/>
+<line x1="240" y1="127" x2="240" y2="159" stroke="#eeeeee" stroke-width="2"/>
+<line x1="215" y1="137" x2="265" y2="137" stroke="#eeeeee" stroke-width="2"/>
+<line x1="240" y1="159" x2="216" y2="185" stroke="#eeeeee" stroke-width="2"/>
+<line x1="240" y1="159" x2="264" y2="185" stroke="#eeeeee" stroke-width="2"/>
+<text x="240" y="212" font-family="Arial, sans-serif" font-size="21" font-weight="bold" text-anchor="middle" fill="#eeeeee">Administrador</text>
+<line x1="240" y1="220" x2="240" y2="2238" stroke="#bfbfbf" stroke-width="2" stroke-dasharray="7 6"/>
+<rect x="515" y="123" width="410" height="79" rx="0" fill="#111111" stroke="#eeeeee" stroke-width="2"/>
+<text x="720" y="151" font-family="Arial, sans-serif" font-size="18" font-weight="normal" text-anchor="middle" fill="#bfbfbf">«boundary»</text>
+<text x="720" y="185" font-family="Arial, sans-serif" font-size="22" font-weight="bold" text-anchor="middle" fill="#eeeeee">:TelaCorrecao</text>
+<line x1="647.0078125" y1="191" x2="792.9921875" y2="191" stroke="#eeeeee" stroke-width="1"/>
+<line x1="720" y1="202" x2="720" y2="2238" stroke="#bfbfbf" stroke-width="2" stroke-dasharray="7 6"/>
+<rect x="995" y="123" width="410" height="79" rx="0" fill="#111111" stroke="#eeeeee" stroke-width="2"/>
+<text x="1200" y="151" font-family="Arial, sans-serif" font-size="18" font-weight="normal" text-anchor="middle" fill="#bfbfbf">«control»</text>
+<text x="1200" y="185" font-family="Arial, sans-serif" font-size="22" font-weight="bold" text-anchor="middle" fill="#eeeeee">:ControladorCorrecao</text>
+<line x1="1086.5" y1="191" x2="1313.5" y2="191" stroke="#eeeeee" stroke-width="1"/>
+<line x1="1200" y1="202" x2="1200" y2="2238" stroke="#bfbfbf" stroke-width="2" stroke-dasharray="7 6"/>
+<rect x="1475" y="123" width="410" height="79" rx="0" fill="#111111" stroke="#eeeeee" stroke-width="2"/>
+<text x="1680" y="151" font-family="Arial, sans-serif" font-size="18" font-weight="normal" text-anchor="middle" fill="#bfbfbf">«entity»</text>
+<text x="1680" y="185" font-family="Arial, sans-serif" font-size="22" font-weight="bold" text-anchor="middle" fill="#eeeeee">:RepositorioProva</text>
+<line x1="1586.0" y1="191" x2="1774.0" y2="191" stroke="#eeeeee" stroke-width="1"/>
+<line x1="1680" y1="202" x2="1680" y2="2238" stroke="#bfbfbf" stroke-width="2" stroke-dasharray="7 6"/>
+<rect x="1955" y="123" width="410" height="79" rx="0" fill="#111111" stroke="#eeeeee" stroke-width="2"/>
+<text x="2160" y="151" font-family="Arial, sans-serif" font-size="18" font-weight="normal" text-anchor="middle" fill="#bfbfbf">«entity»</text>
+<text x="2160" y="185" font-family="Arial, sans-serif" font-size="22" font-weight="bold" text-anchor="middle" fill="#eeeeee">:RepositorioRespostas</text>
+<line x1="2042.0" y1="191" x2="2278.0" y2="191" stroke="#eeeeee" stroke-width="1"/>
+<line x1="2160" y1="202" x2="2160" y2="2238" stroke="#bfbfbf" stroke-width="2" stroke-dasharray="7 6"/>
+<rect x="2435" y="123" width="410" height="79" rx="0" fill="#111111" stroke="#eeeeee" stroke-width="2"/>
+<text x="2640" y="151" font-family="Arial, sans-serif" font-size="18" font-weight="normal" text-anchor="middle" fill="#bfbfbf">«entity»</text>
+<text x="2640" y="185" font-family="Arial, sans-serif" font-size="22" font-weight="bold" text-anchor="middle" fill="#eeeeee">questao:Questao</text>
+<line x1="2552.5" y1="191" x2="2727.5" y2="191" stroke="#eeeeee" stroke-width="1"/>
+<line x1="2640" y1="202" x2="2640" y2="2238" stroke="#bfbfbf" stroke-width="2" stroke-dasharray="7 6"/>
+<rect x="2915" y="123" width="410" height="79" rx="0" fill="#111111" stroke="#eeeeee" stroke-width="2"/>
+<text x="3120" y="151" font-family="Arial, sans-serif" font-size="18" font-weight="normal" text-anchor="middle" fill="#bfbfbf">«entity»</text>
+<text x="3120" y="185" font-family="Arial, sans-serif" font-size="22" font-weight="bold" text-anchor="middle" fill="#eeeeee">resultado:Resultado</text>
+<line x1="3016.0" y1="191" x2="3224.0" y2="191" stroke="#eeeeee" stroke-width="1"/>
+<line x1="3120" y1="202" x2="3120" y2="2238" stroke="#bfbfbf" stroke-width="2" stroke-dasharray="7 6"/>
+<rect x="3395" y="123" width="410" height="79" rx="0" fill="#111111" stroke="#eeeeee" stroke-width="2"/>
+<text x="3600" y="151" font-family="Arial, sans-serif" font-size="18" font-weight="normal" text-anchor="middle" fill="#bfbfbf">«control»</text>
+<text x="3600" y="185" font-family="Arial, sans-serif" font-size="22" font-weight="bold" text-anchor="middle" fill="#eeeeee">:ServicoPontuacao</text>
+<line x1="3502.0" y1="191" x2="3698.0" y2="191" stroke="#eeeeee" stroke-width="1"/>
+<line x1="3600" y1="202" x2="3600" y2="2238" stroke="#bfbfbf" stroke-width="2" stroke-dasharray="7 6"/>
+<rect x="3875" y="123" width="410" height="79" rx="0" fill="#111111" stroke="#eeeeee" stroke-width="2"/>
+<text x="4080" y="151" font-family="Arial, sans-serif" font-size="18" font-weight="normal" text-anchor="middle" fill="#bfbfbf">«entity»</text>
+<text x="4080" y="185" font-family="Arial, sans-serif" font-size="22" font-weight="bold" text-anchor="middle" fill="#eeeeee">:RepositorioResultados</text>
+<line x1="3958.5" y1="191" x2="4201.5" y2="191" stroke="#eeeeee" stroke-width="1"/>
+<line x1="4080" y1="202" x2="4080" y2="2238" stroke="#bfbfbf" stroke-width="2" stroke-dasharray="7 6"/>
+<rect x="1670" y="462" width="20" height="84" rx="0" fill="#168dbb" stroke="#168dbb" stroke-width="2"/>
+<rect x="2150" y="622" width="20" height="84" rx="0" fill="#168dbb" stroke="#168dbb" stroke-width="2"/>
+<rect x="3110" y="894" width="20" height="84" rx="0" fill="#168dbb" stroke="#168dbb" stroke-width="2"/>
+<rect x="2630" y="1110" width="20" height="84" rx="0" fill="#168dbb" stroke="#168dbb" stroke-width="2"/>
+<rect x="3110" y="1270" width="20" height="84" rx="0" fill="#168dbb" stroke="#168dbb" stroke-width="2"/>
+<rect x="3590" y="1458" width="20" height="164" rx="0" fill="#168dbb" stroke="#168dbb" stroke-width="2"/>
+<rect x="4070" y="1698" width="20" height="84" rx="0" fill="#168dbb" stroke="#168dbb" stroke-width="2"/>
+<rect x="1190" y="378" width="20" height="1752" rx="0" fill="#168dbb" stroke="#168dbb" stroke-width="2"/>
+<rect x="710" y="294" width="20" height="1912" rx="0" fill="#168dbb" stroke="#168dbb" stroke-width="2"/>
+<rect x="1202" y="1928" width="20" height="109" rx="0" fill="#168dbb" stroke="#168dbb" stroke-width="2"/>
+<text x="480.0" y="263" font-family="Arial, sans-serif" font-size="21" font-weight="normal" text-anchor="middle" fill="#eeeeee">1. executarCorrecao(provaId)</text>
+<line x1="240" y1="294" x2="720" y2="294" stroke="#eeeeee" stroke-width="2"/>
+<line x1="707" y1="287" x2="720" y2="294" stroke="#eeeeee" stroke-width="2"/>
+<line x1="707" y1="301" x2="720" y2="294" stroke="#eeeeee" stroke-width="2"/>
+<polygon points="720,294 707,287 707,301" fill="#eeeeee"/>
+<text x="960.0" y="347" font-family="Arial, sans-serif" font-size="21" font-weight="normal" text-anchor="middle" fill="#eeeeee">2. corrigir(provaId)</text>
+<line x1="720" y1="378" x2="1200" y2="378" stroke="#eeeeee" stroke-width="2"/>
+<line x1="1187" y1="371" x2="1200" y2="378" stroke="#eeeeee" stroke-width="2"/>
+<line x1="1187" y1="385" x2="1200" y2="378" stroke="#eeeeee" stroke-width="2"/>
+<polygon points="1200,378 1187,371 1187,385" fill="#eeeeee"/>
+<text x="1440.0" y="431" font-family="Arial, sans-serif" font-size="21" font-weight="normal" text-anchor="middle" fill="#eeeeee">3. buscarComGabaritoECriterios(provaId)</text>
+<line x1="1200" y1="462" x2="1680" y2="462" stroke="#eeeeee" stroke-width="2"/>
+<line x1="1667" y1="455" x2="1680" y2="462" stroke="#eeeeee" stroke-width="2"/>
+<line x1="1667" y1="469" x2="1680" y2="462" stroke="#eeeeee" stroke-width="2"/>
+<polygon points="1680,462 1667,455 1667,469" fill="#eeeeee"/>
+<text x="1440.0" y="515" font-family="Arial, sans-serif" font-size="21" font-weight="normal" text-anchor="middle" fill="#eeeeee">4. prova</text>
+<line x1="1680" y1="546" x2="1200" y2="546" stroke="#eeeeee" stroke-width="2" stroke-dasharray="7 6"/>
+<line x1="1213" y1="539" x2="1200" y2="546" stroke="#eeeeee" stroke-width="2"/>
+<line x1="1213" y1="553" x2="1200" y2="546" stroke="#eeeeee" stroke-width="2"/>
+<text x="1680.0" y="591" font-family="Arial, sans-serif" font-size="21" font-weight="normal" text-anchor="middle" fill="#eeeeee">5. listarPorProva(provaId)</text>
+<line x1="1200" y1="622" x2="2160" y2="622" stroke="#eeeeee" stroke-width="2"/>
+<line x1="2147" y1="615" x2="2160" y2="622" stroke="#eeeeee" stroke-width="2"/>
+<line x1="2147" y1="629" x2="2160" y2="622" stroke="#eeeeee" stroke-width="2"/>
+<polygon points="2160,622 2147,615 2147,629" fill="#eeeeee"/>
+<text x="1680.0" y="675" font-family="Arial, sans-serif" font-size="21" font-weight="normal" text-anchor="middle" fill="#eeeeee">6. respostasPorParticipante</text>
+<line x1="2160" y1="706" x2="1200" y2="706" stroke="#eeeeee" stroke-width="2" stroke-dasharray="7 6"/>
+<line x1="1213" y1="699" x2="1200" y2="706" stroke="#eeeeee" stroke-width="2"/>
+<line x1="1213" y1="713" x2="1200" y2="706" stroke="#eeeeee" stroke-width="2"/>
+<rect x="58" y="733" width="170" height="36" rx="7" fill="#67adff" stroke="#67adff" stroke-width="2"/>
+<text x="143" y="758" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="#eeeeee">alt</text>
+<text x="248" y="759" font-family="Arial, sans-serif" font-size="21" font-weight="bold" text-anchor="start" fill="#eeeeee">[gabarito, criterios e respostas disponiveis]</text>
+<rect x="76" y="789" width="170" height="36" rx="7" fill="#67adff" stroke="#67adff" stroke-width="2"/>
+<text x="161" y="814" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="#eeeeee">loop</text>
+<text x="266" y="815" font-family="Arial, sans-serif" font-size="21" font-weight="bold" text-anchor="start" fill="#eeeeee">[para cada participante]</text>
+<text x="2160.0" y="863" font-family="Arial, sans-serif" font-size="21" font-weight="normal" text-anchor="middle" fill="#eeeeee">7. inicializar(participanteId, provaId)</text>
+<line x1="1200" y1="894" x2="3120" y2="894" stroke="#eeeeee" stroke-width="2"/>
+<line x1="3107" y1="887" x2="3120" y2="894" stroke="#eeeeee" stroke-width="2"/>
+<line x1="3107" y1="901" x2="3120" y2="894" stroke="#eeeeee" stroke-width="2"/>
+<polygon points="3120,894 3107,887 3107,901" fill="#eeeeee"/>
+<text x="2160.0" y="947" font-family="Arial, sans-serif" font-size="21" font-weight="normal" text-anchor="middle" fill="#eeeeee">8. resultado</text>
+<line x1="3120" y1="978" x2="1200" y2="978" stroke="#eeeeee" stroke-width="2" stroke-dasharray="7 6"/>
+<line x1="1213" y1="971" x2="1200" y2="978" stroke="#eeeeee" stroke-width="2"/>
+<line x1="1213" y1="985" x2="1200" y2="978" stroke="#eeeeee" stroke-width="2"/>
+<rect x="94" y="1005" width="170" height="36" rx="7" fill="#67adff" stroke="#67adff" stroke-width="2"/>
+<text x="179" y="1030" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="#eeeeee">loop</text>
+<text x="284" y="1031" font-family="Arial, sans-serif" font-size="21" font-weight="bold" text-anchor="start" fill="#eeeeee">[para cada questao da prova]</text>
+<text x="1920.0" y="1079" font-family="Arial, sans-serif" font-size="21" font-weight="normal" text-anchor="middle" fill="#eeeeee">9. avaliar(resposta, alternativasAceitas)</text>
+<line x1="1200" y1="1110" x2="2640" y2="1110" stroke="#eeeeee" stroke-width="2"/>
+<line x1="2627" y1="1103" x2="2640" y2="1110" stroke="#eeeeee" stroke-width="2"/>
+<line x1="2627" y1="1117" x2="2640" y2="1110" stroke="#eeeeee" stroke-width="2"/>
+<polygon points="2640,1110 2627,1103 2627,1117" fill="#eeeeee"/>
+<text x="1920.0" y="1163" font-family="Arial, sans-serif" font-size="21" font-weight="normal" text-anchor="middle" fill="#eeeeee">10. situacao</text>
+<line x1="2640" y1="1194" x2="1200" y2="1194" stroke="#eeeeee" stroke-width="2" stroke-dasharray="7 6"/>
+<line x1="1213" y1="1187" x2="1200" y2="1194" stroke="#eeeeee" stroke-width="2"/>
+<line x1="1213" y1="1201" x2="1200" y2="1194" stroke="#eeeeee" stroke-width="2"/>
+<text x="2160.0" y="1239" font-family="Arial, sans-serif" font-size="21" font-weight="normal" text-anchor="middle" fill="#eeeeee">11. adicionarDetalhe(questao, resposta, situacao)</text>
+<line x1="1200" y1="1270" x2="3120" y2="1270" stroke="#eeeeee" stroke-width="2"/>
+<line x1="3107" y1="1263" x2="3120" y2="1270" stroke="#eeeeee" stroke-width="2"/>
+<line x1="3107" y1="1277" x2="3120" y2="1270" stroke="#eeeeee" stroke-width="2"/>
+<polygon points="3120,1270 3107,1263 3107,1277" fill="#eeeeee"/>
+<text x="2160.0" y="1323" font-family="Arial, sans-serif" font-size="21" font-weight="normal" text-anchor="middle" fill="#eeeeee">12. detalhe</text>
+<line x1="3120" y1="1354" x2="1200" y2="1354" stroke="#eeeeee" stroke-width="2" stroke-dasharray="7 6"/>
+<line x1="1213" y1="1347" x2="1200" y2="1354" stroke="#eeeeee" stroke-width="2"/>
+<line x1="1213" y1="1361" x2="1200" y2="1354" stroke="#eeeeee" stroke-width="2"/>
+<rect x="84" y="1000" width="4152" height="386" rx="22" fill="none" stroke="#eeeeee" stroke-width="2"/>
+<text x="2400.0" y="1427" font-family="Arial, sans-serif" font-size="21" font-weight="normal" text-anchor="middle" fill="#eeeeee">13. calcular(resultado, prova.criterios)</text>
+<line x1="1200" y1="1458" x2="3600" y2="1458" stroke="#eeeeee" stroke-width="2"/>
+<line x1="3587" y1="1451" x2="3600" y2="1458" stroke="#eeeeee" stroke-width="2"/>
+<line x1="3587" y1="1465" x2="3600" y2="1458" stroke="#eeeeee" stroke-width="2"/>
+<polygon points="3600,1458 3587,1451 3587,1465" fill="#eeeeee"/>
+<rect x="3395" y="1496" width="410" height="54" rx="8" fill="#202020" stroke="#eeeeee" stroke-width="2"/>
+<text x="3412" y="1529" font-family="Arial, sans-serif" font-size="21" font-weight="bold" text-anchor="start" fill="#eeeeee">ref</text>
+<text x="3495" y="1530" font-family="Arial, sans-serif" font-size="22" font-weight="normal" text-anchor="start" fill="#eeeeee">RF08</text>
+<text x="2400.0" y="1591" font-family="Arial, sans-serif" font-size="21" font-weight="normal" text-anchor="middle" fill="#eeeeee">14. pontuacao</text>
+<line x1="3600" y1="1622" x2="1200" y2="1622" stroke="#eeeeee" stroke-width="2" stroke-dasharray="7 6"/>
+<line x1="1213" y1="1615" x2="1200" y2="1622" stroke="#eeeeee" stroke-width="2"/>
+<line x1="1213" y1="1629" x2="1200" y2="1622" stroke="#eeeeee" stroke-width="2"/>
+<text x="2640.0" y="1667" font-family="Arial, sans-serif" font-size="21" font-weight="normal" text-anchor="middle" fill="#eeeeee">15. salvar(resultado)</text>
+<line x1="1200" y1="1698" x2="4080" y2="1698" stroke="#eeeeee" stroke-width="2"/>
+<line x1="4067" y1="1691" x2="4080" y2="1698" stroke="#eeeeee" stroke-width="2"/>
+<line x1="4067" y1="1705" x2="4080" y2="1698" stroke="#eeeeee" stroke-width="2"/>
+<polygon points="4080,1698 4067,1691 4067,1705" fill="#eeeeee"/>
+<text x="2640.0" y="1751" font-family="Arial, sans-serif" font-size="21" font-weight="normal" text-anchor="middle" fill="#eeeeee">16. resultadoId</text>
+<line x1="4080" y1="1782" x2="1200" y2="1782" stroke="#eeeeee" stroke-width="2" stroke-dasharray="7 6"/>
+<line x1="1213" y1="1775" x2="1200" y2="1782" stroke="#eeeeee" stroke-width="2"/>
+<line x1="1213" y1="1789" x2="1200" y2="1782" stroke="#eeeeee" stroke-width="2"/>
+<rect x="66" y="784" width="4188" height="1030" rx="22" fill="none" stroke="#eeeeee" stroke-width="2"/>
+<line x1="48" y1="1832" x2="4272" y2="1832" stroke="#eeeeee" stroke-width="2" stroke-dasharray="7 6"/>
+<text x="248" y="1862" font-family="Arial, sans-serif" font-size="21" font-weight="bold" text-anchor="start" fill="#eeeeee">[dados insuficientes]</text>
+<line x1="1200" y1="1928" x2="1265" y2="1928" stroke="#eeeeee" stroke-width="2"/>
+<line x1="1265" y1="1928" x2="1265" y2="1953" stroke="#eeeeee" stroke-width="2"/>
+<line x1="1265" y1="1953" x2="1200" y2="1953" stroke="#eeeeee" stroke-width="2"/>
+<line x1="1213" y1="1946" x2="1200" y2="1953" stroke="#eeeeee" stroke-width="2"/>
+<line x1="1213" y1="1960" x2="1200" y2="1953" stroke="#eeeeee" stroke-width="2"/>
+<polygon points="1200,1953 1213,1946 1213,1960" fill="#eeeeee"/>
+<text x="1230" y="1916" font-family="Arial, sans-serif" font-size="21" font-weight="normal" text-anchor="start" fill="#eeeeee">17. identificarPendencias(prova, respostasPorParticipante)</text>
+<line x1="1200" y1="2012" x2="1265" y2="2012" stroke="#eeeeee" stroke-width="2" stroke-dasharray="7 6"/>
+<line x1="1265" y1="2012" x2="1265" y2="2037" stroke="#eeeeee" stroke-width="2" stroke-dasharray="7 6"/>
+<line x1="1265" y1="2037" x2="1200" y2="2037" stroke="#eeeeee" stroke-width="2" stroke-dasharray="7 6"/>
+<line x1="1213" y1="2030" x2="1200" y2="2037" stroke="#eeeeee" stroke-width="2"/>
+<line x1="1213" y1="2044" x2="1200" y2="2037" stroke="#eeeeee" stroke-width="2"/>
+<text x="1230" y="2000" font-family="Arial, sans-serif" font-size="21" font-weight="normal" text-anchor="start" fill="#eeeeee">18. pendencias</text>
+<rect x="48" y="728" width="4224" height="1330" rx="22" fill="none" stroke="#eeeeee" stroke-width="2"/>
+<text x="960.0" y="2099" font-family="Arial, sans-serif" font-size="21" font-weight="normal" text-anchor="middle" fill="#eeeeee">19. resumo ou pendencias</text>
+<line x1="1200" y1="2130" x2="720" y2="2130" stroke="#eeeeee" stroke-width="2" stroke-dasharray="7 6"/>
+<line x1="733" y1="2123" x2="720" y2="2130" stroke="#eeeeee" stroke-width="2"/>
+<line x1="733" y1="2137" x2="720" y2="2130" stroke="#eeeeee" stroke-width="2"/>
+<text x="480.0" y="2175" font-family="Arial, sans-serif" font-size="21" font-weight="normal" text-anchor="middle" fill="#eeeeee">20. exibirResumo(resumo)</text>
+<line x1="720" y1="2206" x2="240" y2="2206" stroke="#eeeeee" stroke-width="2" stroke-dasharray="7 6"/>
+<line x1="253" y1="2199" x2="240" y2="2206" stroke="#eeeeee" stroke-width="2"/>
+<line x1="253" y1="2213" x2="240" y2="2206" stroke="#eeeeee" stroke-width="2"/>
+</svg>

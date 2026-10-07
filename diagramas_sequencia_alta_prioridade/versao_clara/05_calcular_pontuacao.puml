@@ -1,0 +1,81 @@
+@startuml
+title RF08
+autonumber
+hide footbox
+skinparam shadowing false
+skinparam sequenceMessageAlign center
+skinparam responseMessageBelowArrow false
+skinparam backgroundColor #ffffff
+skinparam defaultFontColor #172b42
+skinparam sequence {
+ ArrowColor #263e56
+ LifeLineBorderColor #596b7d
+ LifeLineBackgroundColor #74b6e6
+ ParticipantBorderColor #263e56
+ ParticipantBackgroundColor #ffffff
+ ParticipantFontColor #172b42
+ ActorBorderColor #172b42
+ ActorBackgroundColor #ffffff
+ ActorFontColor #172b42
+ GroupBorderColor #172b42
+ GroupBackgroundColor #ffffff
+ GroupFontColor #172b42
+ GroupHeaderFontColor #172b42
+}
+skinparam noteBackgroundColor #edf4fb
+skinparam noteFontColor #172b42
+skinparam noteBorderColor #596b7d
+control ":ControladorCorrecao" as P0
+control ":ServicoPontuacao" as P1
+entity "resultado:Resultado" as P2
+entity "detalhe:DetalheCorrecao" as P3
+entity "criterios:CriteriosPontuacao" as P4
+P0 -> P1 : calcular(resultado, criterios)
+activate P1
+P1 -> P2 : obterDetalhes()
+activate P2
+P2 --> P1 : detalhes
+deactivate P2
+P1 -> P2 : iniciarPontuacao()
+activate P2
+P2 --> P1 : total = 0
+deactivate P2
+loop para cada detalhe
+P1 -> P3 : obterSituacaoEPeso()
+activate P3
+P3 --> P1 : situacao, peso
+deactivate P3
+P1 -> P4 : pontuar(situacao, peso)
+activate P4
+alt situacao == ACERTO
+P4 -> P4 : aplicarRegraAcerto(peso)
+activate P4
+P4 --> P4 : pontos
+deactivate P4
+else situacao != ACERTO
+alt situacao == ERRO
+P4 -> P4 : aplicarRegraErro(peso)
+activate P4
+P4 --> P4 : pontos
+deactivate P4
+else outra situacao
+P4 -> P4 : aplicarRegraEspecial(situacao, peso)
+activate P4
+P4 --> P4 : pontos
+deactivate P4
+end
+end
+P4 --> P1 : pontos
+deactivate P4
+P1 -> P2 : acumularPontuacao(pontos)
+activate P2
+P2 --> P1 : totalParcial
+deactivate P2
+end
+P1 -> P2 : obterPontuacao()
+activate P2
+P2 --> P1 : pontuacao
+deactivate P2
+P1 --> P0 : pontuacao
+deactivate P1
+@enduml

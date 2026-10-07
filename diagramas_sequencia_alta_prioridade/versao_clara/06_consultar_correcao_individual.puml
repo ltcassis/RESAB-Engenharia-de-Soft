@@ -1,0 +1,75 @@
+@startuml
+title RF09
+autonumber
+hide footbox
+skinparam shadowing false
+skinparam sequenceMessageAlign center
+skinparam responseMessageBelowArrow false
+skinparam backgroundColor #ffffff
+skinparam defaultFontColor #172b42
+skinparam sequence {
+ ArrowColor #263e56
+ LifeLineBorderColor #596b7d
+ LifeLineBackgroundColor #74b6e6
+ ParticipantBorderColor #263e56
+ ParticipantBackgroundColor #ffffff
+ ParticipantFontColor #172b42
+ ActorBorderColor #172b42
+ ActorBackgroundColor #ffffff
+ ActorFontColor #172b42
+ GroupBorderColor #172b42
+ GroupBackgroundColor #ffffff
+ GroupFontColor #172b42
+ GroupHeaderFontColor #172b42
+}
+skinparam noteBackgroundColor #edf4fb
+skinparam noteFontColor #172b42
+skinparam noteBorderColor #596b7d
+actor "Usuario" as P0
+boundary ":TelaResultado" as P1
+control ":ControladorConsulta" as P2
+entity ":RepositorioResultados" as P3
+entity "resultado:Resultado" as P4
+entity "detalhe:DetalheCorrecao" as P5
+P0 -> P1 : consultar(provaId, participanteId)
+activate P1
+P1 -> P2 : consultarIndividual(provaId, participanteId)
+activate P2
+P2 -> P3 : buscar(provaId, participanteId)
+activate P3
+P3 --> P2 : resultado ou nulo
+deactivate P3
+alt resultado != nulo
+P2 -> P4 : obterDetalhes()
+activate P4
+P4 --> P2 : detalhes
+deactivate P4
+loop para cada detalhe
+P2 -> P5 : obterRespostaFornecida()
+activate P5
+P5 --> P2 : respostaFornecida
+deactivate P5
+P2 -> P5 : obterRespostasCorretas()
+activate P5
+P5 --> P2 : respostasCorretas
+deactivate P5
+P2 -> P5 : obterSituacao()
+activate P5
+P5 --> P2 : acerto, erro ou outra situacao
+deactivate P5
+end
+P2 -> P4 : obterAcertosErrosEPontuacao()
+activate P4
+P4 --> P2 : acertos, erros, pontuacao
+deactivate P4
+else resultado == nulo
+P2 -> P2 : montarRetornoNaoEncontrado(provaId, participanteId)
+activate P2
+P2 --> P2 : retornoIndisponivel
+deactivate P2
+end
+P2 --> P1 : retorno
+deactivate P2
+P1 --> P0 : exibirRetorno(retorno)
+deactivate P1
+@enduml

@@ -1,0 +1,98 @@
+@startuml
+title RF03
+autonumber
+hide footbox
+skinparam shadowing false
+skinparam sequenceMessageAlign center
+skinparam responseMessageBelowArrow false
+skinparam backgroundColor #111111
+skinparam defaultFontColor #EEEEEE
+skinparam sequence {
+ ArrowColor #EEEEEE
+ LifeLineBorderColor #BFBFBF
+ LifeLineBackgroundColor #168DBB
+ ParticipantBorderColor #EEEEEE
+ ParticipantBackgroundColor #111111
+ ParticipantFontColor #EEEEEE
+ ActorBorderColor #EEEEEE
+ ActorBackgroundColor #111111
+ ActorFontColor #EEEEEE
+ GroupBorderColor #EEEEEE
+ GroupBackgroundColor #111111
+ GroupFontColor #EEEEEE
+ GroupHeaderFontColor #EEEEEE
+}
+skinparam noteBackgroundColor #202020
+skinparam noteFontColor #EEEEEE
+skinparam noteBorderColor #BFBFBF
+actor "Administrador" as P0
+boundary ":TelaGabarito" as P1
+control ":ControladorGabarito" as P2
+entity ":RepositorioProva" as P3
+entity "prova:Prova" as P4
+entity "gabarito:Gabarito" as P5
+entity "questao:Questao" as P6
+P0 -> P1 : confirmarCadastro(provaId, itens)
+activate P1
+P1 -> P2 : cadastrar(provaId, itens)
+activate P2
+P2 -> P3 : buscarPorId(provaId)
+activate P3
+P3 --> P2 : prova ou nulo
+deactivate P3
+alt prova encontrada
+P2 -> P5 : preparar(provaId)
+activate P5
+P5 --> P2 : gabaritoEmEdicao
+deactivate P5
+loop para cada item do gabarito
+P2 -> P4 : obterQuestao(item.numero)
+activate P4
+P4 --> P2 : questao
+deactivate P4
+P2 -> P6 : validarAlternativas(item.aceitas)
+activate P6
+P6 --> P2 : erros
+deactivate P6
+alt alternativas validas
+P2 -> P5 : definirResposta(item.numero, item.aceitas)
+activate P5
+P5 --> P2 : respostaDefinida
+deactivate P5
+else alternativas invalidas
+P2 -> P5 : registrarPendencia(item.numero, erros)
+activate P5
+P5 --> P2 : pendencia
+deactivate P5
+end
+end
+P2 -> P5 : validarCompletude(prova)
+activate P5
+P5 --> P2 : pendencias
+deactivate P5
+alt sem pendencias
+P2 -> P4 : definirGabarito(gabarito)
+activate P4
+P4 --> P2 : provaAtualizada
+deactivate P4
+P2 -> P3 : salvar(provaAtualizada)
+activate P3
+P3 --> P2 : gabaritoSalvo
+deactivate P3
+else com pendencias
+P2 -> P5 : listarPendencias()
+activate P5
+P5 --> P2 : pendencias
+deactivate P5
+end
+else prova nao encontrada
+P2 -> P2 : montarErroProvaInexistente(provaId)
+activate P2
+P2 --> P2 : retornoErro
+deactivate P2
+end
+P2 --> P1 : retorno
+deactivate P2
+P1 --> P0 : exibirRetorno(retorno)
+deactivate P1
+@enduml

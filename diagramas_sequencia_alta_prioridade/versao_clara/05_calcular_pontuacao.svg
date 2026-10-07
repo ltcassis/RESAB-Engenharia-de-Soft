@@ -1,0 +1,158 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2400" height="2249" viewBox="0 0 2400 2249">
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="55" y="68" font-family="Arial, sans-serif" font-size="38" font-weight="bold" text-anchor="start" fill="#172b42">RF08</text>
+<line x1="55" y1="88" x2="2345" y2="88" stroke="#c5d0dc" stroke-width="2"/>
+<rect x="35" y="123" width="410" height="79" rx="0" fill="#ffffff" stroke="#263e56" stroke-width="2"/>
+<text x="240" y="151" font-family="Arial, sans-serif" font-size="18" font-weight="normal" text-anchor="middle" fill="#596b7d">«control»</text>
+<text x="240" y="185" font-family="Arial, sans-serif" font-size="22" font-weight="bold" text-anchor="middle" fill="#172b42">:ControladorCorrecao</text>
+<line x1="126.5" y1="191" x2="353.5" y2="191" stroke="#172b42" stroke-width="1"/>
+<line x1="240" y1="202" x2="240" y2="2214" stroke="#596b7d" stroke-width="2" stroke-dasharray="7 6"/>
+<rect x="515" y="123" width="410" height="79" rx="0" fill="#ffffff" stroke="#263e56" stroke-width="2"/>
+<text x="720" y="151" font-family="Arial, sans-serif" font-size="18" font-weight="normal" text-anchor="middle" fill="#596b7d">«control»</text>
+<text x="720" y="185" font-family="Arial, sans-serif" font-size="22" font-weight="bold" text-anchor="middle" fill="#172b42">:ServicoPontuacao</text>
+<line x1="622.0" y1="191" x2="818.0" y2="191" stroke="#172b42" stroke-width="1"/>
+<line x1="720" y1="202" x2="720" y2="2214" stroke="#596b7d" stroke-width="2" stroke-dasharray="7 6"/>
+<rect x="995" y="123" width="410" height="79" rx="0" fill="#ffffff" stroke="#263e56" stroke-width="2"/>
+<text x="1200" y="151" font-family="Arial, sans-serif" font-size="18" font-weight="normal" text-anchor="middle" fill="#596b7d">«entity»</text>
+<text x="1200" y="185" font-family="Arial, sans-serif" font-size="22" font-weight="bold" text-anchor="middle" fill="#172b42">resultado:Resultado</text>
+<line x1="1096.0" y1="191" x2="1304.0" y2="191" stroke="#172b42" stroke-width="1"/>
+<line x1="1200" y1="202" x2="1200" y2="2214" stroke="#596b7d" stroke-width="2" stroke-dasharray="7 6"/>
+<rect x="1475" y="123" width="410" height="79" rx="0" fill="#ffffff" stroke="#263e56" stroke-width="2"/>
+<text x="1680" y="151" font-family="Arial, sans-serif" font-size="18" font-weight="normal" text-anchor="middle" fill="#596b7d">«entity»</text>
+<text x="1680" y="185" font-family="Arial, sans-serif" font-size="22" font-weight="bold" text-anchor="middle" fill="#172b42">detalhe:DetalheCorrecao</text>
+<line x1="1552.0" y1="191" x2="1808.0" y2="191" stroke="#172b42" stroke-width="1"/>
+<line x1="1680" y1="202" x2="1680" y2="2214" stroke="#596b7d" stroke-width="2" stroke-dasharray="7 6"/>
+<rect x="1955" y="123" width="410" height="79" rx="0" fill="#ffffff" stroke="#263e56" stroke-width="2"/>
+<text x="2160" y="151" font-family="Arial, sans-serif" font-size="18" font-weight="normal" text-anchor="middle" fill="#596b7d">«entity»</text>
+<text x="2160" y="185" font-family="Arial, sans-serif" font-size="22" font-weight="bold" text-anchor="middle" fill="#172b42">criterios:CriteriosPontuacao</text>
+<line x1="2013.5" y1="191" x2="2306.5" y2="191" stroke="#172b42" stroke-width="1"/>
+<line x1="2160" y1="202" x2="2160" y2="2214" stroke="#596b7d" stroke-width="2" stroke-dasharray="7 6"/>
+<rect x="1190" y="378" width="20" height="84" rx="0" fill="#74b6e6" stroke="#74b6e6" stroke-width="2"/>
+<rect x="1190" y="538" width="20" height="84" rx="0" fill="#74b6e6" stroke="#74b6e6" stroke-width="2"/>
+<rect x="1670" y="754" width="20" height="84" rx="0" fill="#74b6e6" stroke="#74b6e6" stroke-width="2"/>
+<rect x="2150" y="914" width="20" height="844" rx="0" fill="#74b6e6" stroke="#74b6e6" stroke-width="2"/>
+<rect x="1190" y="1834" width="20" height="84" rx="0" fill="#74b6e6" stroke="#74b6e6" stroke-width="2"/>
+<rect x="1190" y="2022" width="20" height="84" rx="0" fill="#74b6e6" stroke="#74b6e6" stroke-width="2"/>
+<rect x="710" y="294" width="20" height="1888" rx="0" fill="#74b6e6" stroke="#74b6e6" stroke-width="2"/>
+<rect x="2162" y="1040" width="20" height="109" rx="0" fill="#74b6e6" stroke="#74b6e6" stroke-width="2"/>
+<rect x="2162" y="1312" width="20" height="109" rx="0" fill="#74b6e6" stroke="#74b6e6" stroke-width="2"/>
+<rect x="2162" y="1528" width="20" height="109" rx="0" fill="#74b6e6" stroke="#74b6e6" stroke-width="2"/>
+<text x="480.0" y="263" font-family="Arial, sans-serif" font-size="21" font-weight="normal" text-anchor="middle" fill="#172b42">1. calcular(resultado, criterios)</text>
+<line x1="240" y1="294" x2="720" y2="294" stroke="#263e56" stroke-width="2"/>
+<line x1="707" y1="287" x2="720" y2="294" stroke="#263e56" stroke-width="2"/>
+<line x1="707" y1="301" x2="720" y2="294" stroke="#263e56" stroke-width="2"/>
+<polygon points="720,294 707,287 707,301" fill="#263e56"/>
+<text x="960.0" y="347" font-family="Arial, sans-serif" font-size="21" font-weight="normal" text-anchor="middle" fill="#172b42">2. obterDetalhes()</text>
+<line x1="720" y1="378" x2="1200" y2="378" stroke="#263e56" stroke-width="2"/>
+<line x1="1187" y1="371" x2="1200" y2="378" stroke="#263e56" stroke-width="2"/>
+<line x1="1187" y1="385" x2="1200" y2="378" stroke="#263e56" stroke-width="2"/>
+<polygon points="1200,378 1187,371 1187,385" fill="#263e56"/>
+<text x="960.0" y="431" font-family="Arial, sans-serif" font-size="21" font-weight="normal" text-anchor="middle" fill="#172b42">3. detalhes</text>
+<line x1="1200" y1="462" x2="720" y2="462" stroke="#263e56" stroke-width="2" stroke-dasharray="7 6"/>
+<line x1="733" y1="455" x2="720" y2="462" stroke="#263e56" stroke-width="2"/>
+<line x1="733" y1="469" x2="720" y2="462" stroke="#263e56" stroke-width="2"/>
+<text x="960.0" y="507" font-family="Arial, sans-serif" font-size="21" font-weight="normal" text-anchor="middle" fill="#172b42">4. iniciarPontuacao()</text>
+<line x1="720" y1="538" x2="1200" y2="538" stroke="#263e56" stroke-width="2"/>
+<line x1="1187" y1="531" x2="1200" y2="538" stroke="#263e56" stroke-width="2"/>
+<line x1="1187" y1="545" x2="1200" y2="538" stroke="#263e56" stroke-width="2"/>
+<polygon points="1200,538 1187,531 1187,545" fill="#263e56"/>
+<text x="960.0" y="591" font-family="Arial, sans-serif" font-size="21" font-weight="normal" text-anchor="middle" fill="#172b42">5. total = 0</text>
+<line x1="1200" y1="622" x2="720" y2="622" stroke="#263e56" stroke-width="2" stroke-dasharray="7 6"/>
+<line x1="733" y1="615" x2="720" y2="622" stroke="#263e56" stroke-width="2"/>
+<line x1="733" y1="629" x2="720" y2="622" stroke="#263e56" stroke-width="2"/>
+<rect x="58" y="649" width="170" height="36" rx="7" fill="#d9eafe" stroke="#d9eafe" stroke-width="2"/>
+<text x="143" y="674" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="#172b42">loop</text>
+<text x="248" y="675" font-family="Arial, sans-serif" font-size="21" font-weight="bold" text-anchor="start" fill="#172b42">[para cada detalhe]</text>
+<text x="1200.0" y="723" font-family="Arial, sans-serif" font-size="21" font-weight="normal" text-anchor="middle" fill="#172b42">6. obterSituacaoEPeso()</text>
+<line x1="720" y1="754" x2="1680" y2="754" stroke="#263e56" stroke-width="2"/>
+<line x1="1667" y1="747" x2="1680" y2="754" stroke="#263e56" stroke-width="2"/>
+<line x1="1667" y1="761" x2="1680" y2="754" stroke="#263e56" stroke-width="2"/>
+<polygon points="1680,754 1667,747 1667,761" fill="#263e56"/>
+<text x="1200.0" y="807" font-family="Arial, sans-serif" font-size="21" font-weight="normal" text-anchor="middle" fill="#172b42">7. situacao, peso</text>
+<line x1="1680" y1="838" x2="720" y2="838" stroke="#263e56" stroke-width="2" stroke-dasharray="7 6"/>
+<line x1="733" y1="831" x2="720" y2="838" stroke="#263e56" stroke-width="2"/>
+<line x1="733" y1="845" x2="720" y2="838" stroke="#263e56" stroke-width="2"/>
+<text x="1440.0" y="883" font-family="Arial, sans-serif" font-size="21" font-weight="normal" text-anchor="middle" fill="#172b42">8. pontuar(situacao, peso)</text>
+<line x1="720" y1="914" x2="2160" y2="914" stroke="#263e56" stroke-width="2"/>
+<line x1="2147" y1="907" x2="2160" y2="914" stroke="#263e56" stroke-width="2"/>
+<line x1="2147" y1="921" x2="2160" y2="914" stroke="#263e56" stroke-width="2"/>
+<polygon points="2160,914 2147,907 2147,921" fill="#263e56"/>
+<rect x="76" y="949" width="170" height="36" rx="7" fill="#d9eafe" stroke="#d9eafe" stroke-width="2"/>
+<text x="161" y="974" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="#172b42">alt</text>
+<text x="266" y="975" font-family="Arial, sans-serif" font-size="21" font-weight="bold" text-anchor="start" fill="#172b42">[situacao == ACERTO]</text>
+<line x1="2160" y1="1040" x2="2095" y2="1040" stroke="#263e56" stroke-width="2"/>
+<line x1="2095" y1="1040" x2="2095" y2="1065" stroke="#263e56" stroke-width="2"/>
+<line x1="2095" y1="1065" x2="2160" y2="1065" stroke="#263e56" stroke-width="2"/>
+<line x1="2147" y1="1058" x2="2160" y2="1065" stroke="#263e56" stroke-width="2"/>
+<line x1="2147" y1="1072" x2="2160" y2="1065" stroke="#263e56" stroke-width="2"/>
+<polygon points="2160,1065 2147,1058 2147,1072" fill="#263e56"/>
+<text x="1871.0" y="1028" font-family="Arial, sans-serif" font-size="21" font-weight="normal" text-anchor="start" fill="#172b42">9. aplicarRegraAcerto(peso)</text>
+<line x1="2160" y1="1124" x2="2095" y2="1124" stroke="#263e56" stroke-width="2" stroke-dasharray="7 6"/>
+<line x1="2095" y1="1124" x2="2095" y2="1149" stroke="#263e56" stroke-width="2" stroke-dasharray="7 6"/>
+<line x1="2095" y1="1149" x2="2160" y2="1149" stroke="#263e56" stroke-width="2" stroke-dasharray="7 6"/>
+<line x1="2147" y1="1142" x2="2160" y2="1149" stroke="#263e56" stroke-width="2"/>
+<line x1="2147" y1="1156" x2="2160" y2="1149" stroke="#263e56" stroke-width="2"/>
+<text x="2039.0" y="1112" font-family="Arial, sans-serif" font-size="21" font-weight="normal" text-anchor="start" fill="#172b42">10. pontos</text>
+<line x1="66" y1="1160" x2="2334" y2="1160" stroke="#172b42" stroke-width="2" stroke-dasharray="7 6"/>
+<text x="266" y="1190" font-family="Arial, sans-serif" font-size="21" font-weight="bold" text-anchor="start" fill="#172b42">[situacao != ACERTO]</text>
+<rect x="94" y="1221" width="170" height="36" rx="7" fill="#d9eafe" stroke="#d9eafe" stroke-width="2"/>
+<text x="179" y="1246" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="#172b42">alt</text>
+<text x="284" y="1247" font-family="Arial, sans-serif" font-size="21" font-weight="bold" text-anchor="start" fill="#172b42">[situacao == ERRO]</text>
+<line x1="2160" y1="1312" x2="2095" y2="1312" stroke="#263e56" stroke-width="2"/>
+<line x1="2095" y1="1312" x2="2095" y2="1337" stroke="#263e56" stroke-width="2"/>
+<line x1="2095" y1="1337" x2="2160" y2="1337" stroke="#263e56" stroke-width="2"/>
+<line x1="2147" y1="1330" x2="2160" y2="1337" stroke="#263e56" stroke-width="2"/>
+<line x1="2147" y1="1344" x2="2160" y2="1337" stroke="#263e56" stroke-width="2"/>
+<polygon points="2160,1337 2147,1330 2147,1344" fill="#263e56"/>
+<text x="1881.015625" y="1300" font-family="Arial, sans-serif" font-size="21" font-weight="normal" text-anchor="start" fill="#172b42">11. aplicarRegraErro(peso)</text>
+<line x1="2160" y1="1396" x2="2095" y2="1396" stroke="#263e56" stroke-width="2" stroke-dasharray="7 6"/>
+<line x1="2095" y1="1396" x2="2095" y2="1421" stroke="#263e56" stroke-width="2" stroke-dasharray="7 6"/>
+<line x1="2095" y1="1421" x2="2160" y2="1421" stroke="#263e56" stroke-width="2" stroke-dasharray="7 6"/>
+<line x1="2147" y1="1414" x2="2160" y2="1421" stroke="#263e56" stroke-width="2"/>
+<line x1="2147" y1="1428" x2="2160" y2="1421" stroke="#263e56" stroke-width="2"/>
+<text x="2039.0" y="1384" font-family="Arial, sans-serif" font-size="21" font-weight="normal" text-anchor="start" fill="#172b42">12. pontos</text>
+<line x1="84" y1="1432" x2="2316" y2="1432" stroke="#172b42" stroke-width="2" stroke-dasharray="7 6"/>
+<text x="284" y="1462" font-family="Arial, sans-serif" font-size="21" font-weight="bold" text-anchor="start" fill="#172b42">[outra situacao]</text>
+<line x1="2160" y1="1528" x2="2095" y2="1528" stroke="#263e56" stroke-width="2"/>
+<line x1="2095" y1="1528" x2="2095" y2="1553" stroke="#263e56" stroke-width="2"/>
+<line x1="2095" y1="1553" x2="2160" y2="1553" stroke="#263e56" stroke-width="2"/>
+<line x1="2147" y1="1546" x2="2160" y2="1553" stroke="#263e56" stroke-width="2"/>
+<line x1="2147" y1="1560" x2="2160" y2="1553" stroke="#263e56" stroke-width="2"/>
+<polygon points="2160,1553 2147,1546 2147,1560" fill="#263e56"/>
+<text x="1746.0" y="1516" font-family="Arial, sans-serif" font-size="21" font-weight="normal" text-anchor="start" fill="#172b42">13. aplicarRegraEspecial(situacao, peso)</text>
+<line x1="2160" y1="1612" x2="2095" y2="1612" stroke="#263e56" stroke-width="2" stroke-dasharray="7 6"/>
+<line x1="2095" y1="1612" x2="2095" y2="1637" stroke="#263e56" stroke-width="2" stroke-dasharray="7 6"/>
+<line x1="2095" y1="1637" x2="2160" y2="1637" stroke="#263e56" stroke-width="2" stroke-dasharray="7 6"/>
+<line x1="2147" y1="1630" x2="2160" y2="1637" stroke="#263e56" stroke-width="2"/>
+<line x1="2147" y1="1644" x2="2160" y2="1637" stroke="#263e56" stroke-width="2"/>
+<text x="2039.0" y="1600" font-family="Arial, sans-serif" font-size="21" font-weight="normal" text-anchor="start" fill="#172b42">14. pontos</text>
+<rect x="84" y="1216" width="2232" height="442" rx="22" fill="none" stroke="#172b42" stroke-width="2"/>
+<rect x="66" y="944" width="2268" height="742" rx="22" fill="none" stroke="#172b42" stroke-width="2"/>
+<text x="1440.0" y="1727" font-family="Arial, sans-serif" font-size="21" font-weight="normal" text-anchor="middle" fill="#172b42">15. pontos</text>
+<line x1="2160" y1="1758" x2="720" y2="1758" stroke="#263e56" stroke-width="2" stroke-dasharray="7 6"/>
+<line x1="733" y1="1751" x2="720" y2="1758" stroke="#263e56" stroke-width="2"/>
+<line x1="733" y1="1765" x2="720" y2="1758" stroke="#263e56" stroke-width="2"/>
+<text x="960.0" y="1803" font-family="Arial, sans-serif" font-size="21" font-weight="normal" text-anchor="middle" fill="#172b42">16. acumularPontuacao(pontos)</text>
+<line x1="720" y1="1834" x2="1200" y2="1834" stroke="#263e56" stroke-width="2"/>
+<line x1="1187" y1="1827" x2="1200" y2="1834" stroke="#263e56" stroke-width="2"/>
+<line x1="1187" y1="1841" x2="1200" y2="1834" stroke="#263e56" stroke-width="2"/>
+<polygon points="1200,1834 1187,1827 1187,1841" fill="#263e56"/>
+<text x="960.0" y="1887" font-family="Arial, sans-serif" font-size="21" font-weight="normal" text-anchor="middle" fill="#172b42">17. totalParcial</text>
+<line x1="1200" y1="1918" x2="720" y2="1918" stroke="#263e56" stroke-width="2" stroke-dasharray="7 6"/>
+<line x1="733" y1="1911" x2="720" y2="1918" stroke="#263e56" stroke-width="2"/>
+<line x1="733" y1="1925" x2="720" y2="1918" stroke="#263e56" stroke-width="2"/>
+<rect x="48" y="644" width="2304" height="1306" rx="22" fill="none" stroke="#172b42" stroke-width="2"/>
+<text x="960.0" y="1991" font-family="Arial, sans-serif" font-size="21" font-weight="normal" text-anchor="middle" fill="#172b42">18. obterPontuacao()</text>
+<line x1="720" y1="2022" x2="1200" y2="2022" stroke="#263e56" stroke-width="2"/>
+<line x1="1187" y1="2015" x2="1200" y2="2022" stroke="#263e56" stroke-width="2"/>
+<line x1="1187" y1="2029" x2="1200" y2="2022" stroke="#263e56" stroke-width="2"/>
+<polygon points="1200,2022 1187,2015 1187,2029" fill="#263e56"/>
+<text x="960.0" y="2075" font-family="Arial, sans-serif" font-size="21" font-weight="normal" text-anchor="middle" fill="#172b42">19. pontuacao</text>
+<line x1="1200" y1="2106" x2="720" y2="2106" stroke="#263e56" stroke-width="2" stroke-dasharray="7 6"/>
+<line x1="733" y1="2099" x2="720" y2="2106" stroke="#263e56" stroke-width="2"/>
+<line x1="733" y1="2113" x2="720" y2="2106" stroke="#263e56" stroke-width="2"/>
+<text x="480.0" y="2151" font-family="Arial, sans-serif" font-size="21" font-weight="normal" text-anchor="middle" fill="#172b42">20. pontuacao</text>
+<line x1="720" y1="2182" x2="240" y2="2182" stroke="#263e56" stroke-width="2" stroke-dasharray="7 6"/>
+<line x1="253" y1="2175" x2="240" y2="2182" stroke="#263e56" stroke-width="2"/>
+<line x1="253" y1="2189" x2="240" y2="2182" stroke="#263e56" stroke-width="2"/>
+</svg>

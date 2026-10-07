@@ -1,0 +1,85 @@
+@startuml
+title RF07
+autonumber
+hide footbox
+skinparam shadowing false
+skinparam sequenceMessageAlign center
+skinparam responseMessageBelowArrow false
+skinparam backgroundColor #ffffff
+skinparam defaultFontColor #172b42
+skinparam sequence {
+ ArrowColor #263e56
+ LifeLineBorderColor #596b7d
+ LifeLineBackgroundColor #74b6e6
+ ParticipantBorderColor #263e56
+ ParticipantBackgroundColor #ffffff
+ ParticipantFontColor #172b42
+ ActorBorderColor #172b42
+ ActorBackgroundColor #ffffff
+ ActorFontColor #172b42
+ GroupBorderColor #172b42
+ GroupBackgroundColor #ffffff
+ GroupFontColor #172b42
+ GroupHeaderFontColor #172b42
+}
+skinparam noteBackgroundColor #edf4fb
+skinparam noteFontColor #172b42
+skinparam noteBorderColor #596b7d
+actor "Administrador" as P0
+boundary ":TelaCorrecao" as P1
+control ":ControladorCorrecao" as P2
+entity ":RepositorioProva" as P3
+entity ":RepositorioRespostas" as P4
+entity "questao:Questao" as P5
+entity "resultado:Resultado" as P6
+control ":ServicoPontuacao" as P7
+entity ":RepositorioResultados" as P8
+P0 -> P1 : executarCorrecao(provaId)
+activate P1
+P1 -> P2 : corrigir(provaId)
+activate P2
+P2 -> P3 : buscarComGabaritoECriterios(provaId)
+activate P3
+P3 --> P2 : prova
+deactivate P3
+P2 -> P4 : listarPorProva(provaId)
+activate P4
+P4 --> P2 : respostasPorParticipante
+deactivate P4
+alt gabarito, criterios e respostas disponiveis
+loop para cada participante
+P2 -> P6 : inicializar(participanteId, provaId)
+activate P6
+P6 --> P2 : resultado
+deactivate P6
+loop para cada questao da prova
+P2 -> P5 : avaliar(resposta, alternativasAceitas)
+activate P5
+P5 --> P2 : situacao
+deactivate P5
+P2 -> P6 : adicionarDetalhe(questao, resposta, situacao)
+activate P6
+P6 --> P2 : detalhe
+deactivate P6
+end
+P2 -> P7 : calcular(resultado, prova.criterios)
+activate P7
+ref over P7 : RF08
+P7 --> P2 : pontuacao
+deactivate P7
+P2 -> P8 : salvar(resultado)
+activate P8
+P8 --> P2 : resultadoId
+deactivate P8
+end
+else dados insuficientes
+P2 -> P2 : identificarPendencias(prova, respostasPorParticipante)
+activate P2
+P2 --> P2 : pendencias
+deactivate P2
+end
+P2 --> P1 : resumo ou pendencias
+deactivate P2
+P1 --> P0 : exibirResumo(resumo)
+deactivate P1
+@enduml
